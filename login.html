@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NylsTask — Connectez-vous à votre espace de gestion de projets.">
+    <title>Connexion — NylsTask</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body class="page-login">
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE DE CONNEXION                       ║ -->
+    <!-- ║  Sémantique : main > section > form      ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+
+    <main class="login-layout" id="main-content">
+
+        <!-- Panneau gauche — branding -->
+        <aside class="login-brand" aria-hidden="true">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <span class="logo-icon">N</span>
+                    <span class="logo-text">NylsTask</span>
+                </div>
+                <p class="brand-tagline">
+                    Organisez vos projets.<br>
+                    Collaborez sans friction.<br>
+                    Livrez à temps.
+                </p>
+                <ul class="brand-features" role="list">
+                    <li>Gestion de projets collaborative</li>
+                    <li>Suivi des tâches en temps réel</li>
+                    <li>Interface responsive — mobile & desktop</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Panneau droit — formulaire -->
+        <section class="login-panel">
+            <div class="login-card">
+
+                <!-- En-tête du formulaire -->
+                <header class="login-header">
+                    <a href="login.html" class="login-logo" aria-label="Accueil NylsTask">
+                        <span class="logo-icon sm">N</span>
+                        <span class="logo-text">NylsTask</span>
+                    </a>
+                    <h1 class="login-title">Connexion à votre espace</h1>
+                    <p class="login-subtitle">
+                        Pas encore de compte ?
+                        <a href="register.html" class="link-accent">Créer un compte</a>
+                    </p>
+                </header>
+
+                <!-- Formulaire HTML5 natif — novalidate pour garder le contrôle JS -->
+                <form class="login-form" id="loginForm" action="#" method="POST" novalidate
+                    aria-label="Formulaire de connexion">
+
+                    <!-- Message d'erreur global -->
+                    <div class="alert alert--error" id="formError" role="alert" aria-live="polite" hidden>
+                        <span class="alert__icon" aria-hidden="true">!</span>
+                        <span class="alert__text" id="formErrorText"></span>
+                    </div>
+
+                    <!-- Champ email -->
+                    <div class="field-group" id="emailGroup">
+                        <label class="field-label" for="email">
+                            Adresse e-mail
+                            <span class="field-required" aria-hidden="true">*</span>
+                        </label>
+                        <input type="email" id="email" name="email" class="field-input" required autocomplete="email"
+                            placeholder="vous@exemple.com" aria-required="true" aria-describedby="emailError"
+                            aria-invalid="false">
+                        <span class="field-error" id="emailError" role="alert" aria-live="polite"></span>
+                    </div>
+
+                    <!-- Champ mot de passe -->
+                    <div class="field-group" id="passwordGroup">
+                        <label class="field-label" for="password">
+                            Mot de passe
+                            <span class="field-required" aria-hidden="true">*</span>
+                        </label>
+                        <div class="field-input-wrapper">
+                            <input type="password" id="password" name="password" class="field-input" required
+                                minlength="8" autocomplete="current-password" placeholder="8 caractères minimum"
+                                aria-required="true" aria-describedby="passwordError" aria-invalid="false">
+                            <!-- Toggle visibilité mot de passe -->
+                            <button type="button" class="toggle-password" id="togglePassword"
+                                aria-label="Afficher le mot de passe" aria-pressed="false">
+                                <span class="eye-icon" aria-hidden="true" id="eyeIcon">👁</span>
+                            </button>
+                        </div>
+                        <span class="field-error" id="passwordError" role="alert" aria-live="polite"></span>
+                    </div>
+
+                    <!-- Options supplémentaires -->
+                    <div class="login-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="rememberMe" name="remember_me" class="checkbox-input">
+                            <span class="checkbox-custom" aria-hidden="true"></span>
+                            <span class="checkbox-text">Se souvenir de moi</span>
+                        </label>
+                        <a href="forgot-password.html" class="link-muted">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+
+                    <!-- Bouton de soumission -->
+                    <button type="submit" class="btn btn--primary btn--full" id="submitBtn"
+                        aria-describedby="submitHelp">
+                        <span class="btn__text">Se connecter</span>
+                        <span class="btn__loader" aria-hidden="true" hidden>
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                    <p class="visually-hidden" id="submitHelp">
+                        Vos données sont transmises de manière sécurisée.
+                    </p>
+
+                </form>
+
+                <!-- Pied du formulaire -->
+                <footer class="login-footer">
+                    <p class="login-footer__text">
+                        En vous connectant, vous acceptez nos
+                        <a href="#" class="link-muted">Conditions d'utilisation</a>
+                        et notre
+                        <a href="#" class="link-muted">Politique de confidentialité</a>.
+                    </p>
+                </footer>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>

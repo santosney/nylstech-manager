@@ -1,0 +1,380 @@
+/* ================================================================
+   NylsTask — login.css
+   Page de connexion : Layout Flexbox, formulaire, responsive
+   ================================================================ */
+
+/* ────────────────────────────────────────────────────────────────
+   1. LAYOUT PAGE — Flexbox 2 colonnes
+   ──────────────────────────────────────────────────────────────── */
+
+/* MOBILE (défaut) — colonne unique, branding masqué */
+.page-login {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.login-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Panneau branding — masqué sur mobile */
+.login-brand {
+  display: none;
+}
+
+/* Panneau formulaire — pleine largeur sur mobile */
+.login-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: var(--space-8) var(--space-md);
+}
+
+
+/* ── TABLETTE (768px+) ── */
+@media (min-width: 768px) {
+  .login-layout {
+    flex-direction: row;
+    min-height: 100vh;
+  }
+
+  /* Branding visible sur tablette */
+  .login-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    min-height: 100vh;
+    background: var(--color-navy);
+    padding: var(--space-xl);
+    position: sticky;
+    top: 0;
+    left: 0;
+  }
+
+  .login-panel {
+    flex: 1;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+}
+
+
+/* ── DESKTOP (1024px+) ── */
+@media (min-width: 1024px) {
+  .login-brand {
+    width: 42%;
+    padding: var(--space-12);
+  }
+  .login-panel {
+    padding: var(--space-xl);
+  }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   2. PANNEAU BRANDING (gauche)
+   ──────────────────────────────────────────────────────────────── */
+.brand-content {
+  max-width: 380px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.brand-logo .logo-icon {
+  width: 48px;
+  height: 48px;
+  font-size: var(--text-2xl);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent);
+}
+
+.brand-logo .logo-text {
+  font-size: var(--text-3xl);
+  color: #fff;
+}
+
+.brand-tagline {
+  font-family: var(--font-title);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  color: #fff;
+  margin-bottom: var(--space-8);
+}
+
+.brand-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.brand-features li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: rgba(255,255,255,0.75);
+  font-size: var(--text-sm);
+}
+
+.brand-features li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   3. CARTE FORMULAIRE
+   ──────────────────────────────────────────────────────────────── */
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+}
+
+@media (max-width: 400px) {
+  .login-card {
+    padding: var(--space-6) var(--space-md);
+    border-radius: var(--radius-lg);
+  }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   4. EN-TÊTE FORMULAIRE
+   ──────────────────────────────────────────────────────────────── */
+.login-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.login-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  color: var(--color-navy);
+}
+.login-logo:hover { color: var(--color-primary); }
+
+.login-title {
+  font-size: var(--text-2xl);
+  color: var(--color-navy);
+  margin-bottom: var(--space-2);
+}
+
+.login-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   5. CHAMPS DE FORMULAIRE
+   ──────────────────────────────────────────────────────────────── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Groupe champ */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* Label */
+.field-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.field-required {
+  color: var(--color-accent);
+  font-size: var(--text-lg);
+  line-height: 1;
+}
+
+/* Input */
+.field-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.field-input::placeholder {
+  color: var(--color-text-light);
+}
+
+.field-input:hover {
+  border-color: var(--color-border-dark);
+}
+
+.field-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+/* États de validation */
+.field-input:invalid:not(:placeholder-shown) {
+  border-color: var(--color-accent);
+}
+.field-input:invalid:not(:placeholder-shown):focus {
+  box-shadow: var(--shadow-focus-error);
+}
+
+/* Classe JS pour erreur */
+.field-group--error .field-input {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-focus-error);
+}
+.field-group--success .field-input {
+  border-color: var(--color-success);
+}
+
+/* Message d'erreur */
+.field-error {
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  min-height: 16px;
+  display: block;
+}
+
+/* Wrapper avec bouton toggle mot de passe */
+.field-input-wrapper {
+  position: relative;
+}
+.field-input-wrapper .field-input {
+  padding-right: 2.75rem;
+}
+
+.toggle-password {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-base);
+}
+.toggle-password:hover { color: var(--color-primary); }
+
+
+/* ────────────────────────────────────────────────────────────────
+   6. OPTIONS LOGIN (remember me + mot de passe oublié)
+   ──────────────────────────────────────────────────────────────── */
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: calc(-1 * var(--space-2));
+}
+
+/* Checkbox personnalisée */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.checkbox-input:checked + .checkbox-custom {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.checkbox-input:checked + .checkbox-custom::after {
+  content: '✓';
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+}
+.checkbox-input:focus-visible + .checkbox-custom {
+  box-shadow: var(--shadow-focus);
+}
+
+.checkbox-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   7. BOUTON SUBMIT — loader intégré
+   ──────────────────────────────────────────────────────────────── */
+.btn__loader { display: inline-flex; }
+.btn__loader[hidden] { display: none; }
+
+/* État chargement */
+.btn--loading .btn__text { opacity: 0; }
+.btn--loading .btn__loader { display: inline-flex; }
+
+/* ────────────────────────────────────────────────────────────────
+   8. PIED DE FORMULAIRE
+   ──────────────────────────────────────────────────────────────── */
+.login-footer {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.login-footer__text {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: var(--leading-relaxed);
+}
