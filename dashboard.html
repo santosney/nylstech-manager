@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NylsTask - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+</head>
+<body>
+
+    <aside>
+        <div class="logo">
+            <i class="fa-solid fa-n"></i>
+            <span>NylsTask</span>
+        </div>
+        
+        <button class="btn-new">
+            <i class="fa-solid fa-plus"></i> <span>Nouveau projet</span>
+        </button>
+
+        <nav class="nav-section">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-folder"></i> <span>Tous les projets</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-check-double"></i> <span>Mes tâches</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-calendar-days"></i> <span>Calendrier</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-chart-simple"></i> <span>Rapports</span></a>
+        </nav>
+
+        <div class="filter-title">Filtrer par statut</div>
+        <div class="filter-option">
+            <label><input type="checkbox" checked> <span class="dot" style="background:var(--primary-blue)"></span> Tous</label>
+            <span>6</span>
+        </div>
+        <div class="filter-option">
+            <label><input type="checkbox"> <span class="dot" style="background:var(--green)"></span> Actifs</label>
+            <span>4</span>
+        </div>
+        <div class="filter-option">
+            <label><input type="checkbox"> <span class="dot" style="background:var(--orange)"></span> En révision</label>
+            <span>1</span>
+        </div>
+
+        <div class="filter-title">Récents</div>
+        <nav class="nav-section recent-list">
+            <a href="#" class="nav-item"><i class="fa-solid fa-circle" style="font-size: 8px; color: var(--primary-blue);"></i> <span>Projet Alpha</span></a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-circle" style="font-size: 8px; color: var(--green);"></i> <span>Refonte Site Web</span></a>
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Rechercher un projet...">
+            </div>
+            <div class="view-toggle">
+                <button class="view-btn active"><i class="fa-solid fa-grip"></i></button>
+                <button class="view-btn"><i class="fa-solid fa-list"></i></button>
+            </div>
+            <div class="profile-area">
+                <i class="fa-regular fa-bell" style="font-size: 1.2rem; cursor:pointer;"></i>
+                <div class="avatar-circle">JP</div>
+                <span class="user-name">Jean Paul <i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+        </header>
+
+        <h1 class="page-title">Mes projets</h1>
+        <p class="project-count">5 projets au total</p>
+
+        <div class="section-header">
+            <span class="status-dot">●</span> PROJETS ACTIFS <span class="count-badge">4</span>
+        </div>
+
+        <div class="projects-grid">
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon bg-blue">PA</div>
+                    <div class="status-badge actif">● Actif</div>
+                </div>
+                <h3>Projet Alpha</h3>
+                <span class="client-name">Client : EDEC Sarl</span>
+                <p class="project-desc">Refonte complète de l'interface client. Intégration React avec API Laravel. Déploiement prévu en mai...</p>
+                <div class="progress-container">
+                    <div class="progress-bar"><div class="progress-fill" style="width: 65%; background: var(--primary-blue);"></div></div>
+                    <div class="progress-text">65%</div>
+                </div>
+                <div class="card-footer">
+                    <div class="members">
+                        <div class="member-dot" style="background:#ef4444">JP</div>
+                        <div class="member-dot" style="background:#22c55e">MA</div>
+                        <div class="member-dot" style="background:#f59e0b">SB</div>
+                        <span class="member-count">3 membres</span>
+                    </div>
+                </div>
+                <div class="card-action-bar">
+                    <div><i class="fa-solid fa-check"></i> 12 tâches</div>
+                    <div><i class="fa-regular fa-calendar"></i> 15 mai 2026</div>
+                    <button class="btn-voir">Voir <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <div class="card-icon bg-green">RS</div>
+                    <div class="status-badge actif">● Actif</div>
+                </div>
+                <h3>Refonte Site Web</h3>
+                <span class="client-name">Client : NylsTech Digital</span>
+                <p class="project-desc">Nouveau site vitrine avec CMS headless, optimisation SEO et performances Core Web Vitals.</p>
+                <div class="progress-container">
+                    <div class="progress-bar"><div class="progress-fill" style="width: 40%; background: var(--primary-blue);"></div></div>
+                    <div class="progress-text">40%</div>
+                </div>
+                <div class="card-footer">
+                    <div class="members">
+                        <div class="member-dot" style="background:#3b82f6">RA</div>
+                        <div class="member-dot" style="background:#ef4444">FD</div>
+                        <span class="member-count">2 membres</span>
+                    </div>
+                </div>
+                <div class="card-action-bar">
+                    <div><i class="fa-solid fa-check"></i> 8 tâches</div>
+                    <div><i class="fa-regular fa-calendar"></i> 1 juin 2026</div>
+                    <button class="btn-voir">Voir <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+</body>
+</html>
