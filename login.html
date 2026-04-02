@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="NylsTask — Connectez-vous à votre espace de gestion de projets."
+    />
+    <title>NylsTask — Connexion</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <!-- =============================================
+         PANNEAU GAUCHE — Branding & Features
+         ============================================= -->
+      <aside class="panel-left" aria-label="Présentation NylsTask">
+        <div class="panel-left__inner">
+          <!-- Logo -->
+          <div class="brand">
+            <div class="brand__icon" aria-hidden="true">N</div>
+            <span class="brand__name">NylsTask</span>
+          </div>
+
+          <!-- Tagline -->
+          <p class="tagline">
+            Organisez vos projets.<br />
+            Collaborez sans friction.<br />
+            Livrez à temps.
+          </p>
+
+          <!-- Liste des fonctionnalités -->
+          <ul class="feature-list" aria-label="Points clés">
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Gestion de projets collaborative
+            </li>
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Suivi des tâches en temps réel
+            </li>
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Interface responsive — mobile &amp; desktop
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- =============================================
+         PANNEAU DROIT — Formulaire de connexion
+         ============================================= -->
+      <main class="panel-right">
+        <div class="login-card" role="main">
+          <!-- Logo carte -->
+          <div class="card-logo" aria-hidden="true">
+            <div class="card-logo__icon">N</div>
+            <span class="card-logo__name">NylsTask</span>
+          </div>
+
+          <!-- Titre -->
+          <h1 class="card-title">Connexion à votre espace</h1>
+
+          <!-- Sous-titre -->
+          <p class="card-subtitle">
+            Pas encore de compte ?
+            <a href="/register" aria-label="Créer un nouveau compte"
+              >Créer un compte</a
+            >
+          </p>
+
+          <!-- ---- Formulaire ---- -->
+          <form
+            id="login-form"
+            class="login-form"
+            novalidate
+            aria-label="Formulaire de connexion"
+          >
+            <!-- Champ e-mail -->
+            <div class="field-group">
+              <label class="field-label" for="email">
+                Adresse e-mail
+                <span class="required" aria-label="obligatoire">*</span>
+              </label>
+              <input
+                id="email"
+                class="field-input"
+                type="email"
+                name="email"
+                placeholder="demo@nylstech.com"
+                autocomplete="email"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Champ mot de passe -->
+            <div class="field-group">
+              <label class="field-label" for="password">
+                Mot de passe
+                <span class="required" aria-label="obligatoire">*</span>
+              </label>
+              <div class="password-wrapper">
+                <input
+                  id="password"
+                  class="field-input"
+                  type="password"
+                  name="password"
+                  placeholder="••••••••••••"
+                  autocomplete="current-password"
+                  required
+                  aria-required="true"
+                />
+                <!-- Bouton œil -->
+                <button
+                  type="button"
+                  class="toggle-password"
+                  aria-label="Afficher le mot de passe"
+                  tabindex="0"
+                >
+                  <!-- Icône œil (visible) -->
+                  <svg
+                    class="icon-eye"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <!-- Icône œil barré (masqué par défaut) -->
+                  <svg
+                    class="icon-eye-off"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    aria-hidden="true"
+                    style="display: none"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a9.97 9.97 0 012.447-4.075M6.343 6.343A9.956 9.956 0 0112 5c4.477 0 8.268 2.943 9.542 7a9.97 9.97 0 01-1.415 2.693M6.343 6.343L3 3m3.343 3.343l11.314 11.314M16.95 16.95L21 21"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Options : Se souvenir + Mot de passe oublié -->
+            <div class="form-options">
+              <label class="checkbox-label">
+                <input type="checkbox" name="remember" id="remember" />
+                Se souvenir de moi
+              </label>
+              <a href="/forgot-password" class="forgot-link"
+                >Mot de passe oublié ?</a
+              >
+            </div>
+
+            <!-- Bouton de soumission -->
+            <button
+              id="btn-submit"
+              class="btn-submit"
+              type="submit"
+              aria-live="polite"
+            >
+              <span class="btn-text">Se connecter</span>
+              <span
+                class="btn-spinner"
+                aria-label="Chargement..."
+                role="status"
+              ></span>
+            </button>
+
+            <!-- Mentions légales -->
+            <p class="legal-notice">
+              En vous connectant, vous acceptez nos
+              <a href="/terms">Conditions d'utilisation</a>
+              et notre
+              <a href="/privacy">Politique de confidentialité</a>.
+            </p>
+          </form>
+          <!-- /form -->
+        </div>
+        <!-- /login-card -->
+      </main>
+      <!-- /panel-right -->
+    </div>
+    <!-- /page-wrapper -->
+
+    <!-- Scripts -->
+    <script src="Js/login.js"></script>
+  </body>
+</html>

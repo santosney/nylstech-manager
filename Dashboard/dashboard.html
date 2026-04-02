@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NylsTask — Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- =============================
+       NAVBAR
+  ============================== -->
+  <header class="navbar" role="banner">
+    <div class="navbar__left">
+      <div class="brand" aria-label="NylsTask accueil">
+        <span class="brand__icon" aria-hidden="true">N</span>
+        <span class="brand__name">NylsTask</span>
+      </div>
+      <nav class="navbar__nav" aria-label="Navigation principale">
+        <a href="/projets"   class="nav-link nav-link--active" aria-current="page">
+          <span aria-hidden="true">📁</span> Projets
+        </a>
+        <a href="/taches"    class="nav-link">
+          <span aria-hidden="true">✓</span> Mes tâches
+        </a>
+        <a href="/equipe"    class="nav-link">
+          <span aria-hidden="true">👥</span> Équipe
+        </a>
+      </nav>
+    </div>
+
+    <div class="navbar__right">
+      <button class="btn-notif" aria-label="Notifications (3 non lues)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="notif-badge" aria-hidden="true">3</span>
+      </button>
+
+      <button class="user-menu" aria-label="Menu utilisateur Jean Paul"
+        aria-haspopup="true" aria-expanded="false">
+        <span class="avatar avatar--navy" aria-hidden="true">JP</span>
+        <span class="user-menu__name">Jean Paul</span>
+        <span aria-hidden="true">▾</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =============================
+       LAYOUT : sidebar + main
+  ============================== -->
+  <div class="app-body">
+
+    <!-- SIDEBAR -->
+    
+    <aside class="sidebar" aria-label="Panneau latéral">
+
+      <div class="sidebar__top">
+        <button class="btn-new-project">+ Nouveau projet</button>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Navigation secondaire">
+        <a href="/projets" class="sidebar-link sidebar-link--active" aria-current="page">
+          <span class="sidebar-link__icon" aria-hidden="true">📁</span>
+          Tous les projets
+        </a>
+        <a href="/taches" class="sidebar-link">
+          <span class="sidebar-link__icon" aria-hidden="true">✓</span>
+          Mes tâches
+        </a>
+        <a href="/calendrier" class="sidebar-link">
+          <span class="sidebar-link__icon" aria-hidden="true">📅</span>
+          Calendrier
+        </a>
+        <a href="/rapports" class="sidebar-link">
+          <span class="sidebar-link__icon" aria-hidden="true">📊</span>
+          Rapports
+        </a>
+      </nav>
+
+      <!-- Filtres par statut -->
+      <section class="sidebar__section" aria-labelledby="filter-title">
+        <h2 class="sidebar__section-title" id="filter-title">Filtrer par statut</h2>
+        <ul class="filter-list" role="list">
+          <li class="filter-item">
+            <label class="filter-label">
+              <input type="checkbox" checked aria-label="Tous les projets" />
+              <span class="filter-label__text">Tous</span>
+              <span class="filter-badge">6</span>
+            </label>
+          </li>
+          <li class="filter-item">
+            <label class="filter-label">
+              <input type="checkbox" aria-label="Projets actifs" />
+              <span class="filter-label__text">Actifs</span>
+              <span class="filter-badge">4</span>
+            </label>
+          </li>
+          <li class="filter-item">
+            <label class="filter-label">
+              <input type="checkbox" aria-label="Projets en révision" />
+              <span class="filter-label__text">En révision</span>
+              <span class="filter-badge">1</span>
+            </label>
+          </li>
+          <li class="filter-item">
+            <label class="filter-label">
+              <input type="checkbox" aria-label="Projets terminés" />
+              <span class="filter-label__text">Terminés</span>
+              <span class="filter-badge">1</span>
+            </label>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Récents -->
+      <section class="sidebar__section" aria-labelledby="recents-title">
+        <h2 class="sidebar__section-title" id="recents-title">Récents</h2>
+        <ul class="recent-list" role="list">
+          <li><a href="/projet-alpha"    class="recent-link"><span class="dot dot--blue"   aria-hidden="true"></span>Projet Alpha</a></li>
+          <li><a href="/refonte-site"    class="recent-link"><span class="dot dot--green"  aria-hidden="true"></span>Refonte Site Web</a></li>
+          <li><a href="/api-mobile"      class="recent-link"><span class="dot dot--yellow" aria-hidden="true"></span>API Mobile</a></li>
+        </ul>
+      </section>
+
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content" id="main-content" aria-label="Contenu principal">
+
+      <!-- En-tête de la page -->
+      <div class="page-header">
+        <div class="page-header__left">
+          <h1 class="page-title">Mes projets</h1>
+          <p class="page-subtitle">5 projets au total</p>
+        </div>
+        <div class="page-header__right">
+          <div class="search-bar" role="search">
+            <label for="search-projects" class="sr-only">Rechercher un projet</label>
+            <svg class="search-bar__icon" width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input
+              id="search-projects"
+              class="search-bar__input"
+              type="search"
+              placeholder="Rechercher un projet..."
+              aria-label="Rechercher un projet"
+            />
+          </div>
+          <div class="view-toggle" role="group" aria-label="Mode d'affichage">
+            <button class="view-btn view-btn--active" aria-pressed="true"  aria-label="Vue grille">⊞</button>
+            <button class="view-btn"                  aria-pressed="false" aria-label="Vue liste">☰</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Projets Actifs -->
+      <section aria-labelledby="actifs-title">
+        <header class="section-header">
+          <span class="section-dot section-dot--green" aria-hidden="true"></span>
+          <h2 class="section-title" id="actifs-title">Projets actifs</h2>
+          <span class="section-count" aria-label="4 projets actifs">4</span>
+        </header>
+
+        <ul class="projects-grid" role="list">
+
+          <!-- Carte 1 — Projet Alpha -->
+          <li class="project-card" role="article" aria-labelledby="card-title-1">
+            <header class="project-card__header">
+              <div class="project-card__identity">
+                <span class="project-avatar project-avatar--navy" aria-hidden="true">PA</span>
+                <div>
+                  <h3 class="project-card__name" id="card-title-1">Projet Alpha</h3>
+                  <p class="project-card__client">Client : EDEC Sarl</p>
+                </div>
+              </div>
+              <span class="status-badge status-badge--actif">● Actif</span>
+            </header>
+
+            <p class="project-card__desc">
+              Refonte complète de l'interface client. Intégration React avec API Laravel. 
+              Déploiement prévu en mai…
+            </p>
+
+            <div class="project-card__progress">
+              <div class="progress-bar" role="progressbar"
+                aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"
+                aria-label="Progression 65%">
+                <div class="progress-bar__fill" style="width: 65%"></div>
+              </div>
+              <span class="progress-value" aria-hidden="true">65%</span>
+            </div>
+
+            <div class="project-card__members">
+              <ul class="avatar-stack" role="list" aria-label="Membres du projet">
+                <li><span class="avatar avatar--red"    title="JP">JP</span></li>
+                <li><span class="avatar avatar--teal"   title="MA">MA</span></li>
+                <li><span class="avatar avatar--blue"   title="SB">SB</span></li>
+              </ul>
+              <span class="members-count">3 membres</span>
+            </div>
+
+            <footer class="project-card__footer">
+              <span class="meta-item">
+                <span aria-hidden="true">✓</span>
+                <span>12 tâches</span>
+              </span>
+              <span class="meta-item">
+                <span aria-hidden="true">📅</span>
+                <time datetime="2026-05-15">15 mai 2026</time>
+              </span>
+              <a href="/projets/1" class="card-link" aria-label="Voir Projet Alpha">
+                Voir →
+              </a>
+            </footer>
+          </li>
+
+          <!-- Carte 2 — Refonte Site Web -->
+          <li class="project-card" role="article" aria-labelledby="card-title-2">
+            <header class="project-card__header">
+              <div class="project-card__identity">
+                <span class="project-avatar project-avatar--green" aria-hidden="true">RS</span>
+                <div>
+                  <h3 class="project-card__name" id="card-title-2">Refonte Site Web</h3>
+                  <p class="project-card__client">Client : NylsTech Digital</p>
+                </div>
+              </div>
+              <span class="status-badge status-badge--actif">● Actif</span>
+            </header>
+
+            <p class="project-card__desc">
+              Nouveau site vitrine avec CMS headless, optimisation SEO et performances 
+              Core Web Vitals.
+            </p>
+
+            <div class="project-card__progress">
+              <div class="progress-bar" role="progressbar"
+                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                aria-label="Progression 40%">
+                <div class="progress-bar__fill" style="width: 40%"></div>
+              </div>
+              <span class="progress-value" aria-hidden="true">40%</span>
+            </div>
+
+            <div class="project-card__members">
+              <ul class="avatar-stack" role="list" aria-label="Membres du projet">
+                <li><span class="avatar avatar--orange" title="RA">RA</span></li>
+                <li><span class="avatar avatar--red"    title="FD">FD</span></li>
+              </ul>
+              <span class="members-count">2 membres</span>
+            </div>
+
+            <footer class="project-card__footer">
+              <span class="meta-item">
+                <span aria-hidden="true">✓</span>
+                <span>8 tâches</span>
+              </span>
+              <span class="meta-item">
+                <span aria-hidden="true">📅</span>
+                <time datetime="2026-06-01">1 juin 2026</time>
+              </span>
+              <a href="/projets/2" class="card-link" aria-label="Voir Refonte Site Web">
+                Voir →
+              </a>
+            </footer>
+          </li>
+
+          <!-- Carte 3 — API Mobile -->
+          <li class="project-card" role="article" aria-labelledby="card-title-3">
+            <header class="project-card__header">
+              <div class="project-card__identity">
+                <span class="project-avatar project-avatar--olive" aria-hidden="true">AM</span>
+                <div>
+                  <h3 class="project-card__name" id="card-title-3">API Mobile</h3>
+                  <p class="project-card__client">Client : StartupCam</p>
+                </div>
+              </div>
+              <span class="status-badge status-badge--actif">● Actif</span>
+            </header>
+
+            <p class="project-card__desc">
+              Développement de l'API REST Laravel pour l'application mobile Flutter. 
+              Authentification JWT et notifications…
+            </p>
+
+            <div class="project-card__progress">
+              <div class="progress-bar" role="progressbar"
+                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                aria-label="Progression 80%">
+                <div class="progress-bar__fill progress-bar__fill--green" style="width: 80%"></div>
+              </div>
+              <span class="progress-value" aria-hidden="true">80%</span>
+            </div>
+
+            <div class="project-card__members">
+              <ul class="avatar-stack" role="list" aria-label="Membres du projet">
+                <li><span class="avatar avatar--dark"  title="KM">KM</span></li>
+                <li><span class="avatar avatar--teal"  title="BB">BB</span></li>
+              </ul>
+              <span class="members-count">2 membres</span>
+            </div>
+
+            <footer class="project-card__footer">
+              <span class="meta-item">
+                <span aria-hidden="true">✓</span>
+                <span>20 tâches</span>
+              </span>
+              <span class="meta-item">
+                <span aria-hidden="true">📅</span>
+                <time datetime="2026-04-15">15 avril 2026</time>
+              </span>
+              <a href="/projets/3" class="card-link" aria-label="Voir API Mobile">
+                Voir →
+              </a>
+            </footer>
+          </li>
+
+          <!-- Carte 4 — Dashboard Analytics -->
+          <li class="project-card project-card--wide" role="article" aria-labelledby="card-title-4">
+            <header class="project-card__header">
+              <div class="project-card__identity">
+                <span class="project-avatar project-avatar--purple" aria-hidden="true">DA</span>
+                <div>
+                  <h3 class="project-card__name" id="card-title-4">Dashboard Analytics</h3>
+                  <p class="project-card__client">Client : DataViz Inc.</p>
+                </div>
+              </div>
+              <span class="status-badge status-badge--revision">● En révision</span>
+            </header>
+
+            <p class="project-card__desc">
+              Tableau de bord d'analytique avec graphiques temps réel, exports CSV 
+              et gestion multi-tenant.
+            </p>
+
+            <div class="project-card__progress">
+              <div class="progress-bar" role="progressbar"
+                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"
+                aria-label="Progression 95%">
+                <div class="progress-bar__fill progress-bar__fill--green" style="width: 95%"></div>
+              </div>
+              <span class="progress-value" aria-hidden="true">95%</span>
+            </div>
+
+            <div class="project-card__members">
+              <ul class="avatar-stack" role="list" aria-label="Membres du projet">
+                <li><span class="avatar avatar--red"    title="AA">AA</span></li>
+                <li><span class="avatar avatar--orange" title="BB">BB</span></li>
+                <li><span class="avatar avatar--teal"   title="CC">CC</span></li>
+                <li><span class="avatar avatar--dark"   title="+1">+1</span></li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>
