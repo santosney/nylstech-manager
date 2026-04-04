@@ -1,0 +1,438 @@
+<!-- ==================== index.html ==================== -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NylsTask — Dashboard Projets</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <!-- ==================== TOPBAR ==================== -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn mobile-only" id="sidebarToggle" aria-label="Ouvrir le menu">
+          <i data-lucide="menu"></i>
+        </button>
+
+        <a href="#" class="brand">
+          <span class="brand-mark">N</span>
+          <span class="brand-name">NylsTask</span>
+        </a>
+
+        <nav class="topnav desktop-only">
+          <a href="#" class="topnav-link active">
+            <i data-lucide="folder"></i>
+            <span>Projets</span>
+          </a>
+          <a href="#" class="topnav-link">
+            <i data-lucide="check"></i>
+            <span>Mes tâches</span>
+          </a>
+          <a href="#" class="topnav-link">
+            <i data-lucide="users"></i>
+            <span>Équipe</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" id="themeToggle" aria-label="Basculer le mode sombre">
+          <i data-lucide="moon-star"></i>
+        </button>
+
+        <div class="notification-wrap">
+          <button class="icon-btn" id="notifToggle" aria-label="Notifications">
+            <i data-lucide="bell"></i>
+            <span class="notif-badge">3</span>
+          </button>
+
+          <div class="dropdown dropdown-notifications" id="notifDropdown">
+            <div class="dropdown-header">
+              <strong>Notifications</strong>
+              <span>3 nouvelles</span>
+            </div>
+            <div class="dropdown-list">
+              <a href="#" class="dropdown-item">
+                <div class="dropdown-dot success"></div>
+                <div>
+                  <p>Projet Alpha mis à jour</p>
+                  <small>Il y a 5 min</small>
+                </div>
+              </a>
+              <a href="#" class="dropdown-item">
+                <div class="dropdown-dot warning"></div>
+                <div>
+                  <p>Dashboard Analytics en révision</p>
+                  <small>Il y a 18 min</small>
+                </div>
+              </a>
+              <a href="#" class="dropdown-item">
+                <div class="dropdown-dot info"></div>
+                <div>
+                  <p>Nouveau commentaire d’équipe</p>
+                  <small>Il y a 1 h</small>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-menu-wrap">
+          <button class="user-chip" id="userDropdownToggle" aria-label="Menu utilisateur">
+            <span class="avatar">JP</span>
+            <span class="user-name">Jean Paul</span>
+            <i data-lucide="chevron-down"></i>
+          </button>
+
+          <div class="dropdown dropdown-user" id="userDropdown">
+            <a href="#" class="dropdown-item simple">
+              <i data-lucide="user-circle"></i>
+              <span>Mon profil</span>
+            </a>
+            <a href="#" class="dropdown-item simple">
+              <i data-lucide="settings"></i>
+              <span>Paramètres</span>
+            </a>
+            <a href="#" class="dropdown-item simple">
+              <i data-lucide="log-out"></i>
+              <span>Déconnexion</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <button class="new-project-btn">
+          <i data-lucide="plus"></i>
+          <span>Nouveau projet</span>
+        </button>
+
+        <div class="sidebar-block">
+          <a href="#" class="sidebar-link active">
+            <i data-lucide="folder"></i>
+            <span>Tous les projets</span>
+          </a>
+          <a href="#" class="sidebar-link">
+            <i data-lucide="check"></i>
+            <span>Mes tâches</span>
+          </a>
+          <a href="#" class="sidebar-link">
+            <i data-lucide="calendar-days"></i>
+            <span>Calendrier</span>
+          </a>
+          <a href="#" class="sidebar-link">
+            <i data-lucide="bar-chart-3"></i>
+            <span>Rapports</span>
+          </a>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Filtrer par statut</h3>
+
+          <label class="filter-item checked">
+            <input type="checkbox" checked />
+            <span class="checkbox-custom"></span>
+            <span class="filter-label">Tous</span>
+            <span class="filter-count">6</span>
+          </label>
+
+          <label class="filter-item">
+            <input type="checkbox" />
+            <span class="checkbox-custom"></span>
+            <span class="status-dot green"></span>
+            <span class="filter-label">Actifs</span>
+            <span class="filter-count">4</span>
+          </label>
+
+          <label class="filter-item">
+            <input type="checkbox" />
+            <span class="checkbox-custom"></span>
+            <span class="status-dot gold"></span>
+            <span class="filter-label">En révision</span>
+            <span class="filter-count">1</span>
+          </label>
+
+          <label class="filter-item">
+            <input type="checkbox" />
+            <span class="checkbox-custom"></span>
+            <span class="status-dot blue"></span>
+            <span class="filter-label">Terminés</span>
+            <span class="filter-count">1</span>
+          </label>
+        </div>
+
+        <div class="sidebar-section">
+          <h3>Récents</h3>
+
+          <a href="#" class="recent-item">
+            <span class="status-dot blue"></span>
+            <span>Projet Alpha</span>
+          </a>
+          <a href="#" class="recent-item">
+            <span class="status-dot green"></span>
+            <span>Refonte Site Web</span>
+          </a>
+          <a href="#" class="recent-item">
+            <span class="status-dot gold"></span>
+            <span>API Mobile</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content">
+      <section class="page-header">
+        <div>
+          <h1>Mes projets</h1>
+          <p>5 projets au total</p>
+        </div>
+
+        <div class="page-actions">
+          <div class="search-box">
+            <i data-lucide="search"></i>
+            <input type="text" placeholder="Rechercher un projet..." />
+          </div>
+
+          <div class="view-switch">
+            <button class="view-btn active" aria-label="Vue grille">
+              <i data-lucide="layout-grid"></i>
+            </button>
+            <button class="view-btn" aria-label="Vue liste">
+              <i data-lucide="list"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-title">
+        <div class="section-title-left">
+          <span class="live-dot"></span>
+          <h2>Projets actifs</h2>
+          <span class="pill-count">4</span>
+        </div>
+      </section>
+
+      <section class="projects-grid">
+        <!-- CARD 1 -->
+        <article class="project-card">
+          <div class="project-top">
+            <div class="project-id blue-card">PA</div>
+            <div class="project-meta">
+              <h3>Projet Alpha</h3>
+              <p>Client : EDEC Sarl</p>
+            </div>
+            <span class="status-badge success">Actif</span>
+          </div>
+
+          <p class="project-desc">
+            Refonte complète de l'interface client. Intégration React avec API Laravel.
+            Déploiement prévu en mai...
+          </p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar">
+              <span style="width: 65%"></span>
+            </div>
+            <strong>65%</strong>
+          </div>
+
+          <div class="members-row">
+            <div class="avatars">
+              <span class="avatar-mini red">JP</span>
+              <span class="avatar-mini green">MA</span>
+              <span class="avatar-mini gold">SB</span>
+            </div>
+            <span class="members-text">3 membres</span>
+          </div>
+
+          <div class="card-footer-row">
+            <div class="meta-inline">
+              <span><i data-lucide="check"></i> 12 tâches</span>
+              <span><i data-lucide="calendar-days"></i> 15 mai 2026</span>
+            </div>
+            <button class="ghost-btn">Voir <i data-lucide="arrow-right"></i></button>
+          </div>
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="project-card">
+          <div class="project-top">
+            <div class="project-id green-card">RS</div>
+            <div class="project-meta">
+              <h3>Refonte Site Web</h3>
+              <p>Client : NylsTech Digital</p>
+            </div>
+            <span class="status-badge success">Actif</span>
+          </div>
+
+          <p class="project-desc">
+            Nouveau site vitrine avec CMS headless, optimisation SEO et performances
+            Core Web Vitals.
+          </p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar">
+              <span class="green-progress" style="width: 40%"></span>
+            </div>
+            <strong>40%</strong>
+          </div>
+
+          <div class="members-row">
+            <div class="avatars">
+              <span class="avatar-mini blue">RA</span>
+              <span class="avatar-mini red">FD</span>
+            </div>
+            <span class="members-text">2 membres</span>
+          </div>
+
+          <div class="card-footer-row">
+            <div class="meta-inline">
+              <span><i data-lucide="check"></i> 8 tâches</span>
+              <span><i data-lucide="calendar-days"></i> 1 juin 2026</span>
+            </div>
+            <button class="ghost-btn">Voir <i data-lucide="arrow-right"></i></button>
+          </div>
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="project-card">
+          <div class="project-top">
+            <div class="project-id gold-card">AM</div>
+            <div class="project-meta">
+              <h3>API Mobile</h3>
+              <p>Client : StartupCam</p>
+            </div>
+            <span class="status-badge success">Actif</span>
+          </div>
+
+          <p class="project-desc">
+            Développement de l'API REST Laravel pour l'application mobile Flutter.
+            Authentification JWT et notifications...
+          </p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar">
+              <span class="green-progress" style="width: 80%"></span>
+            </div>
+            <strong>80%</strong>
+          </div>
+
+          <div class="members-row">
+            <div class="avatars">
+              <span class="avatar-mini navy">KM</span>
+              <span class="avatar-mini gold">BB</span>
+            </div>
+            <span class="members-text">2 membres</span>
+          </div>
+
+          <div class="card-footer-row">
+            <div class="meta-inline">
+              <span><i data-lucide="check"></i> 20 tâches</span>
+              <span><i data-lucide="calendar-days"></i> 15 avril 2026</span>
+            </div>
+            <button class="ghost-btn">Voir <i data-lucide="arrow-right"></i></button>
+          </div>
+        </article>
+
+        <!-- CARD 4 -->
+        <article class="project-card">
+          <div class="project-top">
+            <div class="project-id purple-card">DA</div>
+            <div class="project-meta">
+              <h3>Dashboard Analytics</h3>
+              <p>Client : DataViz Inc.</p>
+            </div>
+            <span class="status-badge warning">En révision</span>
+          </div>
+
+          <p class="project-desc">
+            Tableau de bord d'analytique avec graphiques temps réel, exports CSV et
+            gestion multi-tenant.
+          </p>
+
+          <div class="progress-wrap">
+            <div class="progress-bar">
+              <span class="green-progress" style="width: 95%"></span>
+            </div>
+            <strong>95%</strong>
+          </div>
+
+          <div class="members-row">
+            <div class="avatars">
+              <span class="avatar-mini purple">DA</span>
+              <span class="avatar-mini gray">UI</span>
+            </div>
+            <span class="members-text">2 membres</span>
+          </div>
+
+          <div class="card-footer-row">
+            <div class="meta-inline">
+              <span><i data-lucide="check"></i> 17 tâches</span>
+              <span><i data-lucide="calendar-days"></i> 20 mai 2026</span>
+            </div>
+            <button class="ghost-btn">Voir <i data-lucide="arrow-right"></i></button>
+          </div>
+        </article>
+      </section>
+
+      <!-- ==================== ANALYTICS ==================== -->
+      <section class="analytics-grid">
+        <article class="analytics-card">
+          <div class="analytics-head">
+            <div>
+              <h3>Progression globale</h3>
+              <p>Vue synthétique des projets</p>
+            </div>
+            <button class="ghost-icon-btn">
+              <i data-lucide="more-horizontal"></i>
+            </button>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="projectProgressChart"></canvas>
+          </div>
+        </article>
+
+        <article class="analytics-card">
+          <div class="analytics-head">
+            <div>
+              <h3>Répartition des statuts</h3>
+              <p>Actifs, révision et terminés</p>
+            </div>
+            <button class="ghost-icon-btn">
+              <i data-lucide="more-horizontal"></i>
+            </button>
+          </div>
+          <div class="chart-wrap chart-wrap-small">
+            <canvas id="projectStatusChart"></canvas>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

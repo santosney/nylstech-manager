@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NylsTask — Connexion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- ── LEFT PANEL ── -->
+    <aside class="panel-left" aria-label="Présentation NylsTask">
+      <div class="panel-left__inner">
+
+        <div class="brand" aria-label="NylsTask">
+          <div class="brand__logo" aria-hidden="true">N</div>
+          <span class="brand__name">NylsTask</span>
+        </div>
+
+        <div class="panel-left__hero">
+          <h1 class="hero-headline">
+            Organisez vos projets.<br />
+            Collaborez sans friction.<br />
+            Livrez à temps.
+          </h1>
+
+          <ul class="feature-list" role="list">
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Gestion de projets collaborative
+            </li>
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Suivi des tâches en temps réel
+            </li>
+            <li class="feature-list__item">
+              <span class="feature-list__dot" aria-hidden="true"></span>
+              Interface responsive — mobile &amp; desktop
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel-left__deco" aria-hidden="true">
+          <div class="deco-grid"></div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ── RIGHT PANEL ── -->
+    <main class="panel-right" role="main">
+      <div class="card" role="region" aria-labelledby="form-title">
+
+        <div class="card__header">
+          <div class="card__logo-wrap" aria-hidden="true">
+            <div class="card__logo">N</div>
+            <span class="card__brand-name">NylsTask</span>
+          </div>
+          <h2 class="card__title" id="form-title">Connexion à votre espace</h2>
+          <p class="card__subtitle">
+            Pas encore de compte ?
+            <a href="#" class="link" id="link-register">Créer un compte</a>
+          </p>
+        </div>
+
+        <form class="form" id="login-form" novalidate autocomplete="on">
+
+          <!-- Email -->
+          <div class="form__group" id="group-email">
+            <label class="form__label" for="email">
+              Adresse e-mail
+              <span class="form__required" aria-hidden="true">*</span>
+            </label>
+            <div class="input-wrap">
+              <input
+                class="input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="demo@nylstech.com"
+                autocomplete="email"
+                required
+                aria-required="true"
+                aria-describedby="email-error"
+              />
+            </div>
+            <span class="form__error" id="email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Password -->
+          <div class="form__group" id="group-password">
+            <label class="form__label" for="password">
+              Mot de passe
+              <span class="form__required" aria-hidden="true">*</span>
+            </label>
+            <div class="input-wrap input-wrap--icon">
+              <input
+                class="input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••••••"
+                autocomplete="current-password"
+                required
+                aria-required="true"
+                aria-describedby="password-error"
+              />
+              <button
+                class="input-icon-btn"
+                type="button"
+                id="toggle-password"
+                aria-label="Afficher le mot de passe"
+                tabindex="0"
+              >
+                <!-- Eye icon -->
+                <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <!-- Eye-off icon -->
+                <svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+            <span class="form__error" id="password-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Options row -->
+          <div class="form__options">
+            <label class="checkbox-label" for="remember">
+              <input class="checkbox" type="checkbox" id="remember" name="remember" />
+              <span class="checkbox-custom" aria-hidden="true"></span>
+              Se souvenir de moi
+            </label>
+            <a href="#" class="link link--small" id="link-forgot">Mot de passe oublié ?</a>
+          </div>
+
+          <!-- Submit -->
+          <button class="btn-submit" type="submit" id="btn-submit">
+            <span class="btn-submit__text">Se connecter</span>
+            <span class="btn-submit__loader" aria-hidden="true"></span>
+          </button>
+
+          <!-- Toast feedback -->
+          <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+          <!-- Legal -->
+          <p class="form__legal">
+            En vous connectant, vous acceptez nos
+            <a href="#" class="link link--muted">Conditions d'utilisation</a>
+            et notre
+            <a href="#" class="link link--muted">Politique de confidentialité</a>.
+          </p>
+
+        </form>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
