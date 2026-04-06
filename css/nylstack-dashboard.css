@@ -1,0 +1,968 @@
+  /* ========================================================
+       1. VARIABLES CSS GLOBALES (Design Tokens)
+       --------------------------------------------------------
+       Ces variables centralisent toutes les couleurs, espacements
+       et polices. Changer une valeur ici met à jour tout le site.
+    ======================================================== */
+    :root {
+      /* --- Couleurs principales --- */
+      --color-bg: #f4f5f7;          /* Fond général de la page (gris très clair) */
+      --color-sidebar: #ffffff;     /* Fond de la barre latérale (blanc pur) */
+      --color-card: #ffffff;        /* Fond des cartes de projet */
+      --color-topbar: #ffffff;      /* Fond de la barre de navigation supérieure */
+
+      /* --- Couleurs de texte --- */
+      --color-text-primary: #1a1d23;    /* Texte principal (quasi-noir) */
+      --color-text-secondary: #6b7280; /* Texte secondaire (gris moyen) */
+      --color-text-muted: #9ca3af;     /* Texte discret (gris clair) */
+
+      /* --- Couleur d'accent --- */
+      --color-accent: #1e3a5f;          /* Bleu marine foncé — boutons, nav active */
+      --color-accent-light: #e8f0fe;    /* Version claire de l'accent */
+
+      /* --- Couleurs de statut --- */
+      --color-active: #22c55e;      /* Vert — projets actifs */
+      --color-revision: #f59e0b;    /* Orange — en révision */
+      --color-done: #6366f1;        /* Violet — terminés */
+
+      /* --- Couleurs des barres de progression --- */
+      --color-progress-alpha: #1e3a5f;  /* Bleu foncé — Projet Alpha (65%) */
+      --color-progress-rs: #1e3a5f;    /* Bleu foncé — Refonte Site Web (40%) */
+      --color-progress-api: #22c55e;   /* Vert — API Mobile (80%) */
+      --color-progress-da: #22c55e;    /* Vert — Dashboard Analytics (95%) */
+
+      /* --- Bordures et ombres --- */
+      --color-border: #e5e7eb;          /* Couleur des lignes de séparation */
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      /* Ombre légère sous les cartes */
+      --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.10);
+      /* Ombre plus prononcée au survol */
+
+      /* --- Typographie --- */
+      --font-base: 'Plus Jakarta Sans', sans-serif;
+
+      /* --- Espacements --- */
+      --sidebar-width: 260px;    /* Largeur fixe de la sidebar */
+      --topbar-height: 64px;     /* Hauteur fixe de la topbar */
+      --gap-cards: 24px;         /* Espacement entre les cartes */
+      --radius-card: 14px;       /* Arrondi des coins des cartes */
+      --radius-btn: 8px;         /* Arrondi des coins des boutons */
+    }
+
+    /* ========================================================
+       2. RESET ET BASE
+       --------------------------------------------------------
+       Supprime les marges/paddings par défaut du navigateur
+       et applique box-sizing border-box (inclut padding et
+       border dans les dimensions déclarées).
+    ======================================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Corps de la page */
+    body {
+      font-family: var(--font-base);   /* Police globale */
+      background-color: var(--color-bg); /* Fond gris très clair */
+      color: var(--color-text-primary);  /* Couleur de texte par défaut */
+      font-size: 14px;                   /* Taille de base */
+      line-height: 1.5;                  /* Hauteur de ligne confortable */
+      min-height: 100vh;                 /* Occupe au moins toute la hauteur de l'écran */
+    }
+
+    /* Supprime les styles par défaut des listes */
+    ul, ol { list-style: none; }
+
+    /* Les liens n'ont pas de soulignement par défaut */
+    a { text-decoration: none; color: inherit; }
+
+    /* ========================================================
+       3. MISE EN PAGE PRINCIPALE (Layout Shell)
+       --------------------------------------------------------
+       Utilise CSS Grid pour créer la structure :
+       [ Sidebar | Contenu principal ]
+       La topbar est positionnée en sticky en haut.
+    ======================================================== */
+    .app-shell {
+      display: grid;
+      /* Colonne sidebar de largeur fixe + colonne principale flexible */
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-rows: var(--topbar-height) 1fr;
+      /* 2 lignes : topbar + contenu */
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar main";
+      min-height: 100vh;
+    }
+
+    /* ========================================================
+       4. BARRE DE NAVIGATION SUPÉRIEURE (Top Bar)
+    ======================================================== */
+    .topbar {
+      grid-area: topbar;           /* Placée dans la zone "topbar" du grid */
+      background: var(--color-topbar);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;         /* Centrage vertical des éléments */
+      justify-content: space-between; /* Éléments séparés aux extrémités */
+      padding: 0 28px;
+      position: sticky;            /* Reste en haut lors du défilement */
+      top: 0;
+      z-index: 100;                /* Au-dessus du contenu */
+      gap: 16px;
+    }
+
+    /* --- Navigation principale dans la topbar --- */
+    .topbar__nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Chaque lien de navigation */
+    .topbar__nav-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-btn);
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      transition: background 0.18s, color 0.18s; /* Animation douce au survol */
+    }
+
+    /* Lien actif (page courante) — fond clair + texte foncé */
+    .topbar__nav-link--active {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* Survol des liens non-actifs */
+    .topbar__nav-link:hover:not(.topbar__nav-link--active) {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+    }
+
+    /* --- Zone droite de la topbar (icônes + profil) --- */
+    .topbar__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Bouton icône générique (cloche, etc.) */
+    .topbar__icon-btn {
+      position: relative;           /* Pour le badge de notification */
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border);
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .topbar__icon-btn:hover { background: var(--color-bg); }
+
+    /* Badge rouge de notification */
+    .topbar__badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ef4444;         /* Rouge vif */
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;     /* Contour blanc qui le détache */
+    }
+
+    /* --- Avatar utilisateur dans la topbar --- */
+    .topbar__user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: var(--radius-btn);
+      transition: background 0.15s;
+    }
+    .topbar__user:hover { background: var(--color-bg); }
+
+    /* Cercle coloré avec les initiales */
+    .topbar__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-accent); /* Bleu marine */
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .topbar__username {
+      font-weight: 600;
+      font-size: 13.5px;
+    }
+
+    /* Chevron vers le bas (flèche de dropdown) */
+    .topbar__chevron {
+      color: var(--color-text-muted);
+      font-size: 11px;
+    }
+
+    /* ========================================================
+       5. BARRE LATÉRALE (Sidebar)
+    ======================================================== */
+    .sidebar {
+      grid-area: sidebar;           /* Zone "sidebar" du grid */
+      background: var(--color-sidebar);
+      border-right: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;       /* Empilage vertical des blocs */
+      padding: 20px 14px;
+      gap: 8px;
+      position: sticky;             /* Reste fixe lors du défilement */
+      top: 0;
+      height: 100vh;                /* Toute la hauteur de l'écran */
+      overflow-y: auto;             /* Défilement si contenu trop long */
+    }
+
+    /* --- En-tête de la sidebar : logo + nom --- */
+    .sidebar__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px 16px;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 4px;
+    }
+
+    /* Carré coloré du logo */
+    .sidebar__logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--color-accent);
+      color: white;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Nom de l'application */
+    .sidebar__brand {
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    /* --- Bouton "Nouveau projet" --- */
+    .sidebar__new-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 16px;
+      background: var(--color-accent);  /* Bleu marine foncé */
+      color: white;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 13.5px;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-bottom: 8px;
+    }
+    .sidebar__new-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px); /* Légère élévation au survol */
+    }
+    .sidebar__new-btn:active {
+      transform: translateY(0);    /* Retour à la normale au clic */
+    }
+
+    /* --- Liens de navigation de la sidebar --- */
+    .sidebar__nav { display: flex; flex-direction: column; gap: 2px; }
+
+    .sidebar__nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-btn);
+      font-weight: 500;
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    /* Lien actif dans la sidebar */
+    .sidebar__nav-link--active {
+      background: var(--color-accent-light);
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .sidebar__nav-link:hover:not(.sidebar__nav-link--active) {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+    }
+
+    /* Icône colorée à gauche des liens */
+    .sidebar__nav-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0; /* Ne rétrécit pas */
+    }
+
+    /* --- Séparateur horizontal --- */
+    .sidebar__divider {
+      height: 1px;
+      background: var(--color-border);
+      margin: 8px 0;
+    }
+
+    /* --- Titre de section dans la sidebar --- */
+    .sidebar__section-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;     /* Espacement des lettres pour effet "label" */
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding: 4px 12px;
+      margin-top: 4px;
+    }
+
+    /* --- Filtres de statut (checkboxes visuelles) --- */
+    .sidebar__filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 12px;
+      border-radius: var(--radius-btn);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sidebar__filter:hover { background: var(--color-bg); }
+
+    .sidebar__filter-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    /* Case à cocher personnalisée */
+    .sidebar__checkbox {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: white;
+    }
+
+    /* État coché : fond bleu + coche blanche */
+    .sidebar__checkbox--checked {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+      font-size: 9px;
+    }
+
+    /* Petit point de couleur pour les statuts */
+    .sidebar__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Compteur numérique à droite */
+    .sidebar__count {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background: var(--color-bg);
+      padding: 1px 7px;
+      border-radius: 20px;
+    }
+
+    /* --- Liste des projets récents --- */
+    .sidebar__recent-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-btn);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .sidebar__recent-item:hover { background: var(--color-bg); }
+
+    /* Point coloré devant chaque projet récent */
+    .sidebar__recent-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ========================================================
+       6. CONTENU PRINCIPAL (Main Content Area)
+    ======================================================== */
+    .main {
+      grid-area: main;
+      padding: 32px 28px;
+      overflow-y: auto;
+      min-width: 0; /* Évite le débordement dans le grid */
+    }
+
+    /* --- En-tête de la page "Mes projets" --- */
+    .main__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;               /* Passe à la ligne sur petit écran */
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .main__title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--color-text-primary);
+    }
+
+    .main__subtitle {
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      margin-top: 3px;
+    }
+
+    /* --- Barre d'outils (search + view toggle) --- */
+    .main__toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Champ de recherche */
+    .main__search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-btn);
+      padding: 8px 14px;
+      font-size: 13.5px;
+      color: var(--color-text-muted);
+      cursor: text;
+      transition: border-color 0.15s;
+      min-width: 220px;
+    }
+    .main__search:focus-within {
+      border-color: var(--color-accent);
+      outline: none;
+    }
+    .main__search input {
+      border: none;
+      outline: none;
+      font-family: var(--font-base);
+      font-size: 13.5px;
+      color: var(--color-text-primary);
+      background: transparent;
+      flex: 1;
+    }
+    .main__search input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    /* Boutons de bascule vue grille/liste */
+    .main__view-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-btn);
+      padding: 4px;
+    }
+
+    .main__view-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    /* Bouton vue actif */
+    .main__view-btn--active {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    /* Bouton avec 3 lignes horizontales (menu/liste) */
+    .main__view-btn--lines {
+      font-size: 16px;
+    }
+
+    /* ========================================================
+       7. SECTION DE PROJETS
+    ======================================================== */
+    .projects-section { margin-bottom: 32px; }
+
+    /* --- En-tête de section avec titre + compteur --- */
+    .projects-section__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .projects-section__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--color-active); /* Vert pour "Actifs" */
+      flex-shrink: 0;
+    }
+
+    .projects-section__title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+    }
+
+    .projects-section__count {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      background: var(--color-border);
+      padding: 1px 7px;
+      border-radius: 20px;
+    }
+
+    /* ========================================================
+       8. GRILLE DES CARTES DE PROJETS
+       --------------------------------------------------------
+       CSS Grid responsive avec auto-fill :
+       chaque colonne fait au minimum 300px, sinon s'étire.
+       Sur grand écran → 3 colonnes
+       Sur écran moyen → 2 colonnes
+       Sur mobile → 1 colonne
+    ======================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--gap-cards);
+    }
+
+    /* ========================================================
+       9. CARTE DE PROJET (Project Card)
+    ======================================================== */
+    .project-card {
+      background: var(--color-card);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--color-border);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.18s; /* Animation au survol */
+    }
+
+    /* Effet de surélévation au survol */
+    .project-card:hover {
+      box-shadow: var(--shadow-card-hover);
+      transform: translateY(-2px);
+    }
+
+    /* --- En-tête de la carte : logo + titre + badge statut --- */
+    .project-card__header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .project-card__header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Logo / avatar du projet (carré coloré avec initiales) */
+    .project-card__logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .project-card__title-block { flex: 1; min-width: 0; }
+
+    /* Titre du projet */
+    .project-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      white-space: nowrap;     /* Pas de retour à la ligne */
+      overflow: hidden;
+      text-overflow: ellipsis; /* "..." si trop long */
+    }
+
+    /* Nom du client en dessous */
+    .project-card__client {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+    }
+
+    /* --- Badge de statut (Actif / En révision / Terminé) --- */
+    .project-card__badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 20px;       /* Forme "pilule" */
+      font-size: 11.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Petit point lumineux dans le badge */
+    .project-card__badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    /* Variantes de couleur par statut */
+    .project-card__badge--active {
+      background: #dcfce7;     /* Vert très clair */
+      color: #15803d;          /* Vert foncé pour le texte */
+    }
+    .project-card__badge--active .project-card__badge-dot {
+      background: var(--color-active);
+    }
+
+    .project-card__badge--revision {
+      background: #fef3c7;     /* Orange très clair */
+      color: #92400e;          /* Orange foncé */
+    }
+    .project-card__badge--revision .project-card__badge-dot {
+      background: var(--color-revision);
+    }
+
+    .project-card__badge--done {
+      background: #ede9fe;     /* Violet très clair */
+      color: #5b21b6;          /* Violet foncé */
+    }
+    .project-card__badge--done .project-card__badge-dot {
+      background: var(--color-done);
+    }
+
+    /* --- Description du projet --- */
+    .project-card__desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      /* Limite à 2 lignes avec points de suspension */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* --- Barre de progression --- */
+    .project-card__progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Fond de la barre (gris clair) */
+    .project-card__progress-bar {
+      flex: 1;
+      height: 6px;
+      background: #e5e7eb;
+      border-radius: 99px;     /* Coins complètement arrondis */
+      overflow: hidden;
+    }
+
+    /* Remplissage coloré de la barre */
+    .project-card__progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.6s ease; /* Animation de remplissage */
+    }
+
+    /* Pourcentage à droite de la barre */
+    .project-card__progress-pct {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      min-width: 34px;
+      text-align: right;
+    }
+
+    /* --- Avatars des membres de l'équipe --- */
+    .project-card__members {
+      display: flex;
+      align-items: center;
+      gap: 0; /* Chevauchement géré par margin-left négatif */
+    }
+
+    /* Cercle avatar de chaque membre */
+    .project-card__member-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid white;   /* Contour blanc pour le chevauchement */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      margin-left: -7px;         /* Crée l'effet de chevauchement */
+      flex-shrink: 0;
+    }
+
+    /* Le premier avatar n'a pas de margin-left négatif */
+    .project-card__member-avatar:first-child { margin-left: 0; }
+
+    /* Texte "N membres" à côté des avatars */
+    .project-card__member-count {
+      font-size: 12.5px;
+      color: var(--color-text-muted);
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    /* --- Pied de carte : tâches + date + bouton Voir --- */
+    .project-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 4px;
+      border-top: 1px solid var(--color-border); /* Ligne de séparation */
+      margin-top: 2px;
+    }
+
+    .project-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* Chaque item meta (tâches ou date) */
+    .project-card__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    /* Icônes SVG dans les meta */
+    .project-card__meta-icon {
+      color: var(--color-text-muted);
+      flex-shrink: 0;
+    }
+
+    /* Bouton "Voir →" */
+    .project-card__btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: var(--radius-btn);
+      font-size: 12.5px;
+      font-weight: 600;
+      border: 1.5px solid var(--color-border);
+      background: white;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .project-card__btn:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+      color: white;
+    }
+
+    /* ========================================================
+       10. ICÔNES SVG INLINE
+       --------------------------------------------------------
+       Taille standard pour toutes les icônes SVG
+    ======================================================== */
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ========================================================
+       11. RESPONSIVE — TABLETTE (max-width: 1024px)
+       --------------------------------------------------------
+       La sidebar se cache, on bascule sur 2 colonnes de cartes
+    ======================================================== */
+    @media (max-width: 1024px) {
+      .app-shell {
+        /* Sur tablette : sidebar devient une ligne en bas,
+           ou on la masque et on réorganise */
+        grid-template-columns: 1fr;
+        grid-template-rows: var(--topbar-height) 1fr;
+        grid-template-areas:
+          "topbar"
+          "main";
+      }
+
+      /* Cache la sidebar sur tablette */
+      .sidebar { display: none; }
+
+      .main { padding: 24px 20px; }
+
+      /* Barre de recherche moins large */
+      .main__search { min-width: 160px; }
+    }
+
+    /* ========================================================
+       12. RESPONSIVE — MOBILE (max-width: 640px)
+       --------------------------------------------------------
+       1 colonne de cartes, topbar simplifiée
+    ======================================================== */
+    @media (max-width: 640px) {
+      .topbar { padding: 0 16px; }
+
+      /* Cache le nom d'utilisateur sur mobile (garde l'avatar) */
+      .topbar__username, .topbar__chevron { display: none; }
+
+      .main { padding: 20px 14px; }
+      .main__title { font-size: 20px; }
+
+      /* Masque la barre de recherche sur très petit écran */
+      .main__search { display: none; }
+
+      /* Force 1 colonne sur mobile */
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Bouton "Voir" prend toute la largeur sur mobile */
+      .project-card__footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .project-card__btn { width: 100%; justify-content: center; }
+
+      /* Réduit le padding des cartes */
+      .project-card { padding: 16px; }
+    }
+
+    /* ========================================================
+       13. BOUTON HAMBURGER (visible uniquement sur tablette/mobile)
+       --------------------------------------------------------
+       Apparaît quand la sidebar est cachée
+    ======================================================== */
+    .topbar__menu-btn {
+      display: none;              /* Caché par défaut */
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      background: white;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+    }
+
+    @media (max-width: 1024px) {
+      .topbar__menu-btn { display: flex; } /* Visible sur tablette et mobile */
+    }
+
+    /* ========================================================
+       14. MICRO-ANIMATIONS DE CHARGEMENT
+       --------------------------------------------------------
+       Les cartes apparaissent en fondu avec décalage
+    ======================================================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Chaque carte est animée avec un délai croissant */
+    .project-card {
+      animation: fadeInUp 0.4s ease both;
+    }
+    .project-card:nth-child(1) { animation-delay: 0.05s; }
+    .project-card:nth-child(2) { animation-delay: 0.12s; }
+    .project-card:nth-child(3) { animation-delay: 0.19s; }
+    .project-card:nth-child(4) { animation-delay: 0.26s; }
+    .project-card:nth-child(5) { animation-delay: 0.33s; }
+

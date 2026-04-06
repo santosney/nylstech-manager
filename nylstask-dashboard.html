@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<!-- Déclaration du type de document HTML5 -->
+<html lang="fr">
+<!-- Langue principale du document : français -->
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Encodage des caractères : UTF-8 pour supporter les accents français -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Viewport responsive : s'adapte à la largeur de l'écran de l'appareil -->
+
+  <title>NylsTask – Mes Projets</title>
+  <!-- Titre de l'onglet du navigateur -->
+
+  <!-- ======================================================
+       IMPORT DE LA POLICE GOOGLE FONTS
+       - "Plus Jakarta Sans" : moderne, claire, très lisible
+         utilisée pour les titres et textes courants
+       - Poids chargés : 400 (normal), 500 (medium), 600 (semi-bold), 700 (bold)
+  ====================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nylstack-dashboard.css">
+</head>
+
+<body>
+
+  <!-- ============================================================
+       STRUCTURE GLOBALE : app-shell
+       Contient : sidebar | topbar | main
+  ============================================================ -->
+  <div class="app-shell">
+
+    <!-- ===========================================================
+         BARRE LATÉRALE GAUCHE (Sidebar)
+    =========================================================== -->
+    <aside class="sidebar" aria-label="Navigation principale">
+
+      <!-- Logo + Nom de l'app -->
+      <div class="sidebar__header">
+        <div class="sidebar__logo">N</div>
+        <span class="sidebar__brand">NylsTask</span>
+      </div>
+
+      <!-- Bouton principal d'action -->
+      <button class="sidebar__new-btn">
+        <!-- Icône "+" SVG inline -->
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Nouveau projet
+      </button>
+
+      <!-- Liens de navigation -->
+      <nav class="sidebar__nav" aria-label="Menu latéral">
+
+        <!-- Tous les projets — état actif -->
+        <a class="sidebar__nav-link sidebar__nav-link--active" href="#">
+          <span class="sidebar__nav-icon">
+            <!-- Icône dossier -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+          </span>
+          Tous les projets
+        </a>
+
+        <!-- Mes tâches -->
+        <a class="sidebar__nav-link" href="#">
+          <span class="sidebar__nav-icon">
+            <!-- Icône check -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </span>
+          Mes tâches
+        </a>
+
+        <!-- Calendrier -->
+        <a class="sidebar__nav-link" href="#">
+          <span class="sidebar__nav-icon">
+            <!-- Icône calendrier -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </span>
+          Calendrier
+        </a>
+
+        <!-- Rapports -->
+        <a class="sidebar__nav-link" href="#">
+          <span class="sidebar__nav-icon">
+            <!-- Icône graphique en barres -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </span>
+          Rapports
+        </a>
+      </nav>
+
+      <div class="sidebar__divider"></div>
+
+      <!-- Titre de section filtre -->
+      <p class="sidebar__section-title">Filtrer par statut</p>
+
+      <!-- Filtre : Tous (coché) -->
+      <div class="sidebar__filter">
+        <div class="sidebar__filter-left">
+          <div class="sidebar__checkbox sidebar__checkbox--checked">✓</div>
+          <span>Tous</span>
+        </div>
+        <span class="sidebar__count">6</span>
+      </div>
+
+      <!-- Filtre : Actifs -->
+      <div class="sidebar__filter">
+        <div class="sidebar__filter-left">
+          <div class="sidebar__checkbox"></div>
+          <span class="sidebar__dot" style="background:#22c55e;"></span>
+          <span>Actifs</span>
+        </div>
+        <span class="sidebar__count">4</span>
+      </div>
+
+      <!-- Filtre : En révision -->
+      <div class="sidebar__filter">
+        <div class="sidebar__filter-left">
+          <div class="sidebar__checkbox"></div>
+          <span class="sidebar__dot" style="background:#f59e0b;"></span>
+          <span>En révision</span>
+        </div>
+        <span class="sidebar__count">1</span>
+      </div>
+
+      <!-- Filtre : Terminés -->
+      <div class="sidebar__filter">
+        <div class="sidebar__filter-left">
+          <div class="sidebar__checkbox"></div>
+          <span class="sidebar__dot" style="background:#6366f1;"></span>
+          <span>Terminés</span>
+        </div>
+        <span class="sidebar__count">1</span>
+      </div>
+
+      <div class="sidebar__divider"></div>
+
+      <!-- Section projets récents -->
+      <p class="sidebar__section-title">Récents</p>
+
+      <div class="sidebar__recent-item">
+        <span class="sidebar__recent-dot" style="background:#6366f1;"></span>
+        Projet Alpha
+      </div>
+      <div class="sidebar__recent-item">
+        <span class="sidebar__recent-dot" style="background:#22c55e;"></span>
+        Refonte Site Web
+      </div>
+      <div class="sidebar__recent-item">
+        <span class="sidebar__recent-dot" style="background:#f59e0b;"></span>
+        API Mobile
+      </div>
+
+    </aside><!-- /sidebar -->
+
+    <!-- ===========================================================
+         BARRE DE NAVIGATION SUPÉRIEURE (Top Bar)
+    =========================================================== -->
+    <header class="topbar" role="banner">
+
+      <!-- Bouton hamburger visible sur tablette/mobile -->
+      <button class="topbar__menu-btn" aria-label="Ouvrir le menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Navigation de la topbar -->
+      <nav class="topbar__nav" aria-label="Navigation secondaire">
+
+        <!-- Projets — lien actif -->
+        <a class="topbar__nav-link topbar__nav-link--active" href="#">
+          <!-- Icône dossier coloré -->
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+          Projets
+        </a>
+
+        <!-- Mes tâches -->
+        <a class="topbar__nav-link" href="#">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Mes tâches
+        </a>
+
+        <!-- Équipe -->
+        <a class="topbar__nav-link" href="#">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Équipe
+        </a>
+      </nav>
+
+      <!-- Droite de la topbar -->
+      <div class="topbar__right">
+
+        <!-- Bouton notifications avec badge -->
+        <button class="topbar__icon-btn" aria-label="Notifications (3)">
+          <!-- Icône cloche -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <!-- Badge avec le nombre 3 -->
+          <span class="topbar__badge" aria-hidden="true">3</span>
+        </button>
+
+        <!-- Profil utilisateur -->
+        <div class="topbar__user" role="button" tabindex="0" aria-label="Profil Jean Paul">
+          <div class="topbar__avatar" aria-hidden="true">JP</div>
+          <span class="topbar__username">Jean Paul</span>
+          <!-- Flèche de dropdown -->
+          <span class="topbar__chevron" aria-hidden="true">▾</span>
+        </div>
+
+      </div>
+    </header><!-- /topbar -->
+
+    <!-- ===========================================================
+         CONTENU PRINCIPAL (Main)
+    =========================================================== -->
+    <main class="main" id="main-content">
+
+      <!-- En-tête de la page -->
+      <div class="main__header">
+        <div>
+          <h1 class="main__title">Mes projets</h1>
+          <p class="main__subtitle">5 projets au total</p>
+        </div>
+
+        <!-- Barre d'outils : recherche + toggle de vue -->
+        <div class="main__toolbar">
+
+          <!-- Champ de recherche -->
+          <div class="main__search" role="search">
+            <!-- Icône loupe -->
+            <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="search" placeholder="Rechercher un projet..." aria-label="Rechercher">
+          </div>
+
+          <!-- Boutons toggle vue grille / liste -->
+          <div class="main__view-toggle" role="group" aria-label="Mode d'affichage">
+
+            <!-- Vue grille (active) — icône 4 carrés -->
+            <button class="main__view-btn main__view-btn--active" aria-label="Vue grille" aria-pressed="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              </svg>
+            </button>
+
+            <!-- Vue liste — icône 3 lignes -->
+            <button class="main__view-btn main__view-btn--lines" aria-label="Vue liste" aria-pressed="false">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div><!-- /main__header -->
+
+      <!-- =========================================================
+           SECTION PROJETS ACTIFS
+      ========================================================= -->
+      <section class="projects-section" aria-labelledby="actifs-title">
+
+        <!-- En-tête de section -->
+        <div class="projects-section__header">
+          <span class="projects-section__dot"></span>
+          <h2 class="projects-section__title" id="actifs-title">Projets actifs</h2>
+          <span class="projects-section__count">4</span>
+        </div>
+
+        <!-- Grille des cartes -->
+        <div class="projects-grid">
+
+          <!-- ================================================
+               CARTE 1 : Projet Alpha
+          ================================================ -->
+          <article class="project-card" tabindex="0" aria-label="Projet Alpha">
+            <div class="project-card__header">
+              <div class="project-card__header-left">
+                <!-- Logo bleu ardoise -->
+                <div class="project-card__logo" style="background:#1e3a5f;">PA</div>
+                <div class="project-card__title-block">
+                  <h3 class="project-card__title">Projet Alpha</h3>
+                  <p class="project-card__client">Client : EDEC Sarl</p>
+                </div>
+              </div>
+              <!-- Badge "Actif" -->
+              <span class="project-card__badge project-card__badge--active">
+                <span class="project-card__badge-dot"></span>
+                Actif
+              </span>
+            </div>
+
+            <!-- Description -->
+            <p class="project-card__desc">
+              Refonte complète de l'interface client. Intégration React avec API Laravel.
+              Déploiement prévu en mai…
+            </p>
+
+            <!-- Barre de progression à 65% -->
+            <div class="project-card__progress-wrap">
+              <div class="project-card__progress-bar" role="progressbar"
+                aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                <div class="project-card__progress-fill"
+                  style="width:65%; background:var(--color-progress-alpha);"></div>
+              </div>
+              <span class="project-card__progress-pct">65%</span>
+            </div>
+
+            <!-- Membres de l'équipe -->
+            <div class="project-card__members">
+              <div class="project-card__member-avatar" style="background:#6366f1;" title="Jean Paul">JP</div>
+              <div class="project-card__member-avatar" style="background:#ec4899;" title="Marie A.">MA</div>
+              <div class="project-card__member-avatar" style="background:#22c55e;" title="Sam B.">SB</div>
+              <span class="project-card__member-count">3 membres</span>
+            </div>
+
+            <!-- Pied de carte -->
+            <div class="project-card__footer">
+              <div class="project-card__meta">
+                <!-- Nombre de tâches -->
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  12 tâches
+                </span>
+                <!-- Date d'échéance -->
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  15 mai 2026
+                </span>
+              </div>
+              <button class="project-card__btn">
+                Voir
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </article><!-- /Projet Alpha -->
+
+          <!-- ================================================
+               CARTE 2 : Refonte Site Web
+          ================================================ -->
+          <article class="project-card" tabindex="0" aria-label="Refonte Site Web">
+            <div class="project-card__header">
+              <div class="project-card__header-left">
+                <!-- Logo vert foncé -->
+                <div class="project-card__logo" style="background:#166534;">RS</div>
+                <div class="project-card__title-block">
+                  <h3 class="project-card__title">Refonte Site Web</h3>
+                  <p class="project-card__client">Client : NylsTech Digital</p>
+                </div>
+              </div>
+              <span class="project-card__badge project-card__badge--active">
+                <span class="project-card__badge-dot"></span>
+                Actif
+              </span>
+            </div>
+
+            <p class="project-card__desc">
+              Nouveau site vitrine avec CMS headless, optimisation SEO et
+              performances Core Web Vitals.
+            </p>
+
+            <!-- Barre de progression à 40% -->
+            <div class="project-card__progress-wrap">
+              <div class="project-card__progress-bar" role="progressbar"
+                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                <div class="project-card__progress-fill"
+                  style="width:40%; background:var(--color-progress-rs);"></div>
+              </div>
+              <span class="project-card__progress-pct">40%</span>
+            </div>
+
+            <div class="project-card__members">
+              <div class="project-card__member-avatar" style="background:#ef4444;" title="Rania A.">RA</div>
+              <div class="project-card__member-avatar" style="background:#f97316;" title="Félix D.">FD</div>
+              <span class="project-card__member-count">2 membres</span>
+            </div>
+
+            <div class="project-card__footer">
+              <div class="project-card__meta">
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  8 tâches
+                </span>
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  1 juin 2026
+                </span>
+              </div>
+              <button class="project-card__btn">
+                Voir
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </article><!-- /Refonte Site Web -->
+
+          <!-- ================================================
+               CARTE 3 : API Mobile
+          ================================================ -->
+          <article class="project-card" tabindex="0" aria-label="API Mobile">
+            <div class="project-card__header">
+              <div class="project-card__header-left">
+                <!-- Logo olive/doré -->
+                <div class="project-card__logo" style="background:#78350f;">AM</div>
+                <div class="project-card__title-block">
+                  <h3 class="project-card__title">API Mobile</h3>
+                  <p class="project-card__client">Client : StartupCam</p>
+                </div>
+              </div>
+              <span class="project-card__badge project-card__badge--active">
+                <span class="project-card__badge-dot"></span>
+                Actif
+              </span>
+            </div>
+
+            <p class="project-card__desc">
+              Développement de l'API REST Laravel pour l'application mobile Flutter.
+              Authentification JWT et notifications…
+            </p>
+
+            <!-- Barre de progression à 80% — couleur verte -->
+            <div class="project-card__progress-wrap">
+              <div class="project-card__progress-bar" role="progressbar"
+                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                <div class="project-card__progress-fill"
+                  style="width:80%; background:var(--color-progress-api);"></div>
+              </div>
+              <span class="project-card__progress-pct">80%</span>
+            </div>
+
+            <div class="project-card__members">
+              <div class="project-card__member-avatar" style="background:#0f172a;" title="Karl M.">KM</div>
+              <div class="project-card__member-avatar" style="background:#0284c7;" title="Bob B.">BB</div>
+              <span class="project-card__member-count">2 membres</span>
+            </div>
+
+            <div class="project-card__footer">
+              <div class="project-card__meta">
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  20 tâches
+                </span>
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  15 avril 2026
+                </span>
+              </div>
+              <button class="project-card__btn">
+                Voir
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </article><!-- /API Mobile -->
+
+          <!-- ================================================
+               CARTE 4 : Dashboard Analytics (En révision)
+          ================================================ -->
+          <article class="project-card" tabindex="0" aria-label="Dashboard Analytics">
+            <div class="project-card__header">
+              <div class="project-card__header-left">
+                <!-- Logo violet -->
+                <div class="project-card__logo" style="background:#6d28d9;">DA</div>
+                <div class="project-card__title-block">
+                  <h3 class="project-card__title">Dashboard Analytics</h3>
+                  <p class="project-card__client">Client : DataViz Inc.</p>
+                </div>
+              </div>
+              <!-- Badge "En révision" -->
+              <span class="project-card__badge project-card__badge--revision">
+                <span class="project-card__badge-dot"></span>
+                En révision
+              </span>
+            </div>
+
+            <p class="project-card__desc">
+              Tableau de bord d'analytique avec graphiques temps réel,
+              exports CSV et gestion multi-tenant.
+            </p>
+
+            <!-- Barre de progression à 95% — vert car presque terminé -->
+            <div class="project-card__progress-wrap">
+              <div class="project-card__progress-bar" role="progressbar"
+                aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                <div class="project-card__progress-fill"
+                  style="width:95%; background:var(--color-progress-da);"></div>
+              </div>
+              <span class="project-card__progress-pct">95%</span>
+            </div>
+
+            <div class="project-card__members">
+              <div class="project-card__member-avatar" style="background:#be185d;" title="Alix P.">AP</div>
+              <div class="project-card__member-avatar" style="background:#dc2626;" title="Omar T.">OT</div>
+              <div class="project-card__member-avatar" style="background:#16a34a;" title="Nadia K.">NK</div>
+              <div class="project-card__member-avatar" style="background:#9ca3af;" title="+1">+1</div>
+              <span class="project-card__member-count">4 membres</span>
+            </div>
+
+            <div class="project-card__footer">
+              <div class="project-card__meta">
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  15 tâches
+                </span>
+                <span class="project-card__meta-item">
+                  <svg class="project-card__meta-icon icon" width="13" height="13"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  30 mars 2026
+                </span>
+              </div>
+              <button class="project-card__btn">
+                Voir
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
+                </svg>
+              </button>
+            </div>
+          </article><!-- /Dashboard Analytics -->
+
+        </div><!-- /projects-grid -->
+      </section><!-- /projects-section actifs -->
+
+    </main><!-- /main -->
+
+  </div><!-- /app-shell -->
+  <script src="js/nylstack-dashboard.js"></script>
+</body>
+</html>
