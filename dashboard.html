@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NylsTask — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       TOPBAR
+  ═══════════════════════════════════════ -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">
+        <div class="logo-icon">N</div>
+        <span class="brand-name">NylsTask</span>
+      </div>
+      <nav class="top-nav">
+        <a href="#" class="top-nav-link active">
+          <span class="nav-icon folder-icon"></span>
+          Projets
+        </a>
+        <a href="#" class="top-nav-link">
+          <span class="nav-icon check-icon">✓</span>
+          Mes tâches
+        </a>
+        <a href="#" class="top-nav-link">
+          <span class="nav-icon team-icon">👥</span>
+          Équipe
+        </a>
+      </nav>
+    </div>
+
+    <div class="topbar-right">
+      <button class="notif-btn" aria-label="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="badge">3</span>
+      </button>
+      <div class="user-chip">
+        <div class="avatar navy">JP</div>
+        <span class="user-name">Jean Paul</span>
+        <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       LAYOUT PRINCIPAL
+  ═══════════════════════════════════════ -->
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <button class="btn-new-project">+ Nouveau projet</button>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active">
+          <span class="sidebar-icon folder-yellow">📁</span>
+          Tous les projets
+        </a>
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">✓</span>
+          Mes tâches
+        </a>
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">📅</span>
+          Calendrier
+        </a>
+        <a href="#" class="sidebar-link">
+          <span class="sidebar-icon">📊</span>
+          Rapports
+        </a>
+      </nav>
+
+      <!-- Filtres -->
+      <div class="sidebar-section">
+        <p class="sidebar-section-label">FILTRER PAR STATUT</p>
+        <label class="filter-item checked">
+          <input type="checkbox" checked />
+          <span class="filter-check"></span>
+          <span class="filter-label">Tous</span>
+          <span class="filter-count">6</span>
+        </label>
+        <label class="filter-item">
+          <input type="checkbox" />
+          <span class="filter-check"></span>
+          <span class="dot green"></span>
+          <span class="filter-label">Actifs</span>
+          <span class="filter-count">4</span>
+        </label>
+        <label class="filter-item">
+          <input type="checkbox" />
+          <span class="filter-check"></span>
+          <span class="dot orange"></span>
+          <span class="filter-label">En révision</span>
+          <span class="filter-count">1</span>
+        </label>
+        <label class="filter-item">
+          <input type="checkbox" />
+          <span class="filter-check"></span>
+          <span class="dot blue"></span>
+          <span class="filter-label">Terminés</span>
+          <span class="filter-count">1</span>
+        </label>
+      </div>
+
+      <!-- Récents -->
+      <div class="sidebar-section">
+        <p class="sidebar-section-label">RÉCENTS</p>
+        <a href="#" class="recent-item">
+          <span class="dot blue"></span>
+          Projet Alpha
+        </a>
+        <a href="#" class="recent-item">
+          <span class="dot green"></span>
+          Refonte Site Web
+        </a>
+        <a href="#" class="recent-item">
+          <span class="dot orange-dot"></span>
+          API Mobile
+        </a>
+      </div>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- En-tête de page -->
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1 class="page-title">Mes projets</h1>
+          <p class="page-subtitle">5 projets au total</p>
+        </div>
+        <div class="page-header-right">
+          <div class="search-bar">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Rechercher un projet..." />
+          </div>
+          <button class="view-btn active" aria-label="Vue grille">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" aria-label="Vue liste">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ─── SECTION : PROJETS ACTIFS ─── -->
+      <div class="projects-section">
+        <div class="section-header">
+          <span class="section-dot green"></span>
+          <span class="section-title">PROJETS ACTIFS</span>
+          <span class="section-count">4</span>
+        </div>
+
+        <div class="cards-grid">
+
+          <!-- Carte 1 : Projet Alpha -->
+          <article class="project-card" style="--card-delay: 0.05s">
+            <div class="card-header">
+              <div class="card-identity">
+                <div class="project-avatar navy-blue">PA</div>
+                <div>
+                  <h2 class="card-title">Projet Alpha</h2>
+                  <p class="card-client">Client : EDEC Sarl</p>
+                </div>
+              </div>
+              <span class="status-badge active">● Actif</span>
+            </div>
+
+            <p class="card-description">Refonte complète de l'interface client. Intégration React avec API Laravel. Déploiement prévu en mai...</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill blue" style="width: 65%"></div>
+              </div>
+              <span class="progress-percent">65%</span>
+            </div>
+
+            <div class="card-members">
+              <div class="member-avatars">
+                <div class="member-av" style="background:#1E4D72">JP</div>
+                <div class="member-av" style="background:#C0392B">MA</div>
+                <div class="member-av" style="background:#27AE60">SB</div>
+              </div>
+              <span class="members-count">3 membres</span>
+            </div>
+
+            <div class="card-footer">
+              <span class="meta-item">✓ 12 tâches</span>
+              <span class="meta-item">📅 15 mai 2026</span>
+              <a href="#" class="card-link">Voir →</a>
+            </div>
+          </article>
+
+          <!-- Carte 2 : Refonte Site Web -->
+          <article class="project-card" style="--card-delay: 0.12s">
+            <div class="card-header">
+              <div class="card-identity">
+                <div class="project-avatar dark-green">RS</div>
+                <div>
+                  <h2 class="card-title">Refonte Site Web</h2>
+                  <p class="card-client">Client : NylsTech Digital</p>
+                </div>
+              </div>
+              <span class="status-badge active">● Actif</span>
+            </div>
+
+            <p class="card-description">Nouveau site vitrine avec CMS headless, optimisation SEO et performances Core Web Vitals.</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill blue" style="width: 40%"></div>
+              </div>
+              <span class="progress-percent">40%</span>
+            </div>
+
+            <div class="card-members">
+              <div class="member-avatars">
+                <div class="member-av" style="background:#C0392B">RA</div>
+                <div class="member-av" style="background:#E67E22">FD</div>
+              </div>
+              <span class="members-count">2 membres</span>
+            </div>
+
+            <div class="card-footer">
+              <span class="meta-item">✓ 8 tâches</span>
+              <span class="meta-item">📅 1 juin 2026</span>
+              <a href="#" class="card-link">Voir →</a>
+            </div>
+          </article>
+
+          <!-- Carte 3 : API Mobile -->
+          <article class="project-card" style="--card-delay: 0.19s">
+            <div class="card-header">
+              <div class="card-identity">
+                <div class="project-avatar olive">AM</div>
+                <div>
+                  <h2 class="card-title">API Mobile</h2>
+                  <p class="card-client">Client : StartupCam</p>
+                </div>
+              </div>
+              <span class="status-badge active">● Actif</span>
+            </div>
+
+            <p class="card-description">Développement de l'API REST Laravel pour l'application mobile Flutter. Authentification JWT et notifications...</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill green" style="width: 80%"></div>
+              </div>
+              <span class="progress-percent">80%</span>
+            </div>
+
+            <div class="card-members">
+              <div class="member-avatars">
+                <div class="member-av" style="background:#2C3E50">KM</div>
+                <div class="member-av" style="background:#8E44AD">BB</div>
+              </div>
+              <span class="members-count">2 membres</span>
+            </div>
+
+            <div class="card-footer">
+              <span class="meta-item">✓ 20 tâches</span>
+              <span class="meta-item">📅 15 avril 2026</span>
+              <a href="#" class="card-link">Voir →</a>
+            </div>
+          </article>
+
+          <!-- Carte 4 : Dashboard Analytics -->
+          <article class="project-card" style="--card-delay: 0.26s">
+            <div class="card-header">
+              <div class="card-identity">
+                <div class="project-avatar purple">DA</div>
+                <div>
+                  <h2 class="card-title">Dashboard Analytics</h2>
+                  <p class="card-client">Client : DataViz Inc.</p>
+                </div>
+              </div>
+              <span class="status-badge revision">● En révision</span>
+            </div>
+
+            <p class="card-description">Tableau de bord d'analytique avec graphiques temps réel, exports CSV et gestion multi-tenant.</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill green" style="width: 95%"></div>
+              </div>
+              <span class="progress-percent">95%</span>
+            </div>
+
+            <div class="card-members">
+              <div class="member-avatars">
+                <div class="member-av" style="background:#C0392B">AL</div>
+                <div class="member-av" style="background:#E67E22">ND</div>
+                <div class="member-av" style="background:#27AE60">TC</div>
+                <div class="member-av" style="background:#2C3E50">MK</div>
+              </div>
+              <span class="members-count">4 membres</span>
+            </div>
+
+            <div class="card-footer">
+              <span class="meta-item">✓ 31 tâches</span>
+              <span class="meta-item">📅 10 mars 2026</span>
+              <a href="#" class="card-link">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- ─── SECTION : TERMINÉS ─── -->
+      <div class="projects-section" style="margin-top: 36px;">
+        <div class="section-header">
+          <span class="section-dot blue"></span>
+          <span class="section-title">TERMINÉS</span>
+          <span class="section-count">1</span>
+        </div>
+
+        <div class="cards-grid">
+
+          <!-- Carte 5 : App E-commerce -->
+          <article class="project-card done" style="--card-delay: 0.32s">
+            <div class="card-header">
+              <div class="card-identity">
+                <div class="project-avatar teal">AE</div>
+                <div>
+                  <h2 class="card-title">App E-commerce</h2>
+                  <p class="card-client">Client : BoutiqueX</p>
+                </div>
+              </div>
+              <span class="status-badge done-badge">● Terminé</span>
+            </div>
+
+            <p class="card-description">Plateforme e-commerce complète avec paiement Stripe, gestion des stocks et tableau d'administration.</p>
+
+            <div class="progress-wrap">
+              <div class="progress-bar">
+                <div class="progress-fill done-fill" style="width: 100%"></div>
+              </div>
+              <span class="progress-percent">100%</span>
+            </div>
+
+            <div class="card-members">
+              <div class="member-avatars">
+                <div class="member-av" style="background:#1E4D72">JP</div>
+                <div class="member-av" style="background:#27AE60">SB</div>
+              </div>
+              <span class="members-count">2 membres</span>
+            </div>
+
+            <div class="card-footer">
+              <span class="meta-item">✓ 45 tâches</span>
+              <span class="meta-item">📅 28 fév. 2026</span>
+              <a href="#" class="card-link">Voir →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
