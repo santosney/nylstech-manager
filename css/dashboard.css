@@ -1,0 +1,915 @@
+/* ==============================================
+   NYLSTASK – Dashboard "Mes Projets"
+   Fichier  : style.css
+   Description : Styles complets du tableau de bord
+                 avec responsive design (mobile, tablette,
+                 desktop). Chaque section est commentée.
+   ============================================== */
+
+
+/* -----------------------------------------------
+   1. VARIABLES CSS GLOBALES
+   Toute la palette est définie ici pour
+   faciliter les modifications futures.
+   ----------------------------------------------- */
+:root {
+  /* ---- Couleurs principales ---- */
+  --blue-dark    : #1a3a6b;     /* Fond sidebar / bouton actif */
+  --blue-mid     : #2563b0;     /* Éléments interactifs bleus */
+  --blue-light   : #3b82f6;     /* Accents, avatars */
+  --cyan         : #3db8e8;     /* Topbar nav active, liens */
+  --cyan-light   : #e0f4fd;     /* Fond badge actif léger */
+
+  /* ---- Statuts ---- */
+  --green        : #10b981;     /* Actif */
+  --green-light  : #d1fae5;     /* Fond badge actif */
+  --orange       : #f59e0b;     /* En révision */
+  --orange-light : #fef3c7;     /* Fond badge révision */
+  --red          : #ef4444;     /* Terminé / erreur */
+
+  /* ---- Neutres ---- */
+  --white        : #ffffff;
+  --bg-app       : #f0f4f9;     /* Fond général de l'application */
+  --bg-sidebar   : #f7f9fc;     /* Fond de la sidebar */
+  --bg-card      : #ffffff;     /* Fond des cartes */
+  --text-title   : #1a2b4a;     /* Titres foncés */
+  --text-body    : #4a5568;     /* Texte courant */
+  --text-muted   : #8899aa;     /* Texte secondaire / placeholders */
+  --border       : #e2e8f0;     /* Bordures légères */
+  --topbar-bg    : #ffffff;     /* Fond de la topbar */
+
+  /* ---- Ombres ---- */
+  --shadow-sm    : 0 1px 4px rgba(30,60,120,0.07);
+  --shadow-card  : 0 2px 12px rgba(30,60,120,0.09);
+  --shadow-top   : 0 2px 8px rgba(30,60,120,0.08);
+
+  /* ---- Typographie ---- */
+  --font-title   : 'DM Sans', sans-serif;
+  --font-body    : 'Nunito', sans-serif;
+
+  /* ---- Dimensions ---- */
+  --topbar-h     : 56px;
+  --sidebar-w    : 220px;
+  --radius       : 10px;
+  --radius-sm    : 6px;
+}
+
+
+/* -----------------------------------------------
+   2. RESET & BASE
+   ----------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-body);
+  min-height: 100vh;
+}
+
+ul { list-style: none; }
+a  { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: var(--font-body); }
+input  { font-family: var(--font-body); }
+
+
+/* -----------------------------------------------
+   3. TOPBAR – Barre de navigation supérieure
+   ----------------------------------------------- */
+.topbar {
+  position: fixed;                 /* Fixée en haut de l'écran */
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--topbar-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-top);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 20px;
+  z-index: 100;                    /* Au-dessus du contenu */
+}
+
+/* ---- Logo dans la topbar ---- */
+.topbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;                  /* Empêche le logo de rétrécir */
+}
+
+/* Icône carrée bleue avec N */
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--blue-dark);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.logo-name {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-title);
+}
+
+/* ---- Navigation principale (onglets) ---- */
+.topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+
+/* Chaque lien de navigation */
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: background 0.18s, color 0.18s;
+}
+
+.nav-item:hover {
+  background: var(--bg-app);
+  color: var(--blue-mid);
+}
+
+/* Onglet actif : fond orange/amber doux comme dans la maquette */
+.nav-item--active {
+  background: #fff3e8;
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* ---- Zone utilisateur (droite de la topbar) ---- */
+.topbar__user {
+  margin-left: auto;               /* Pousse vers la droite */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Bouton cloche de notification */
+.notif-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.notif-btn:hover { background: var(--bg-app); }
+
+/* Badge rouge sur la cloche */
+.notif-badge {
+  position: absolute;
+  top: 2px; right: 2px;
+  width: 16px; height: 16px;
+  background: var(--red);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* Avatar / bouton utilisateur */
+.user-avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s;
+}
+
+.user-avatar:hover { background: var(--bg-app); }
+
+/* Cercle avec initiales */
+.user-avatar > span:first-child {
+  width: 28px; height: 28px;
+  background: var(--blue-dark);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-title);
+}
+
+/* ---- Bouton hamburger (mobile) ---- */
+.hamburger {
+  display: none;                   /* Caché sur desktop */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px; height: 18px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--text-title);
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+/* Hamburger ouvert → croix */
+.hamburger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.is-open span:nth-child(2) { opacity: 0; }
+.hamburger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+/* -----------------------------------------------
+   4. LAYOUT PRINCIPAL
+   Flex row : sidebar + contenu principal
+   ----------------------------------------------- */
+.layout {
+  display: flex;
+  padding-top: var(--topbar-h);    /* Espace pour la topbar fixe */
+  min-height: 100vh;
+}
+
+
+/* -----------------------------------------------
+   5. SIDEBAR – Barre latérale gauche
+   ----------------------------------------------- */
+.sidebar {
+  position: fixed;                 /* Fixée sur le côté */
+  top: var(--topbar-h);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;                /* Scroll si le contenu dépasse */
+  padding: 20px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 90;
+  transition: transform 0.3s ease; /* Animation slide sur mobile */
+}
+
+/* ---- Bouton "Nouveau projet" ---- */
+.btn-new-project {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 14px;
+  background: var(--blue-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+
+.btn-new-project:hover { background: var(--blue-mid); }
+
+/* ---- Navigation de la sidebar ---- */
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+/* Item de navigation générique */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  transition: background 0.18s, color 0.18s;
+}
+
+.sidebar-item:hover {
+  background: #e8f0fb;
+  color: var(--blue-mid);
+}
+
+/* Item actif (fond orange doux + texte orange) */
+.sidebar-item--active {
+  background: #fff3e8;
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* ---- Sections de la sidebar (titres + items) ---- */
+.sidebar__section {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sidebar__section-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  padding: 0 12px;
+  margin-bottom: 6px;
+}
+
+/* ---- Filtres par statut ---- */
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-body);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.filter-item:hover { background: #e8f0fb; }
+
+/* Compteur à droite de chaque filtre */
+.filter-count {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 1px 7px;
+  border-radius: 20px;
+}
+
+/* Checkbox personnalisée pour "Tous" */
+.filter-checkbox { display: none; }
+
+.filter-custom-check {
+  width: 14px; height: 14px;
+  border: 2px solid var(--blue-mid);
+  border-radius: 3px;
+  background: var(--blue-mid);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fond actif pour "Tous" */
+.filter-item--active {
+  background: #e8f0fb;
+  color: var(--blue-dark);
+  font-weight: 600;
+}
+
+/* Puces colorées de statut */
+.filter-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.filter-dot--green  { background: var(--green); }
+.filter-dot--orange { background: var(--orange); }
+.filter-dot--red    { background: var(--red); }
+
+/* ---- Projets récents ---- */
+.recent-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-body);
+  transition: background 0.18s;
+}
+
+.recent-item:hover { background: #e8f0fb; }
+
+/* Puces colorées des projets récents */
+.recent-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.recent-dot--blue   { background: var(--blue-light); }
+.recent-dot--teal   { background: var(--green); }
+.recent-dot--purple { background: #8b5cf6; }
+
+
+/* -----------------------------------------------
+   6. CONTENU PRINCIPAL
+   ----------------------------------------------- */
+.main-content {
+  margin-left: var(--sidebar-w);   /* Espace pour la sidebar fixe */
+  flex: 1;
+  padding: 28px 28px 40px;
+  min-width: 0;                    /* Empêche le dépassement dans flex */
+}
+
+/* ---- En-tête de la page ---- */
+.content-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-family: var(--font-title);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-title);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* Partie droite de l'en-tête : recherche + vue */
+.content-header__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- Barre de recherche ---- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  color: var(--text-muted);
+  transition: border-color 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(61,184,232,0.12);
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: var(--text-body);
+  width: 180px;
+  background: transparent;
+}
+
+.search-input::placeholder { color: var(--text-muted); }
+
+/* ---- Boutons de vue (grille / liste) ---- */
+.view-toggle {
+  display: flex;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.view-btn {
+  background: none;
+  border: none;
+  padding: 7px 10px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.view-btn:hover { background: var(--bg-app); color: var(--blue-mid); }
+
+.view-btn--active {
+  background: var(--blue-dark);
+  color: white;
+}
+
+
+/* -----------------------------------------------
+   7. SECTIONS PROJETS
+   ----------------------------------------------- */
+.projects-section {
+  margin-bottom: 28px;
+}
+
+/* En-tête de section (puce + titre + compteur) */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.section-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+}
+.section-dot--blue { background: var(--blue-mid); }
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.section-count {
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--border);
+  color: var(--text-muted);
+  padding: 1px 8px;
+  border-radius: 20px;
+}
+
+
+/* -----------------------------------------------
+   8. GRILLE DES CARTES PROJETS
+   - 3 colonnes sur desktop (≥1100px)
+   - 2 colonnes sur tablette (768–1099px)
+   - 1 colonne sur mobile (≤767px)
+   ----------------------------------------------- */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+
+/* -----------------------------------------------
+   9. CARTE PROJET
+   ----------------------------------------------- */
+.project-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30,60,120,0.13);
+}
+
+/* Carte large (utilise 100% de la largeur disponible) */
+.project-card--wide {
+  max-width: 440px;              /* Limite la largeur sur desktop */
+}
+
+/* ---- Haut de carte : avatar + infos + badge ---- */
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Avatar carré coloré avec initiales */
+.project-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Couleurs des avatars projet */
+.project-avatar--blue   { background: var(--blue-mid); }
+.project-avatar--teal   { background: #0d9488; }
+.project-avatar--amber  { background: #d97706; }
+.project-avatar--green  { background: #059669; }
+
+/* Infos textuelles */
+.card-info { flex: 1; min-width: 0; }
+
+.card-title {
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-title);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-client {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---- Badges de statut ---- */
+.status-badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.status-badge--actif {
+  background: var(--green-light);
+  color: #065f46;
+}
+
+.status-badge--revision {
+  background: var(--orange-light);
+  color: #92400e;
+}
+
+.status-badge--termine {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ---- Description ---- */
+.card-desc {
+  font-size: 12.5px;
+  color: var(--text-body);
+  line-height: 1.55;
+  /* Limite à 3 lignes avec ellipse */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ---- Barre de progression ---- */
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Piste de la barre */
+.progress-bar {
+  flex: 1;
+  height: 5px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Remplissage coloré */
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+.progress-fill--blue  { background: var(--blue-mid); }
+.progress-fill--green { background: var(--green); }
+
+/* Pourcentage */
+.progress-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ---- Pied de carte : membres ---- */
+.card-footer {
+  display: flex;
+  align-items: center;
+}
+
+.members {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Avatar circulaire de membre */
+.member-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  /* Chevauchement léger des avatars */
+  margin-left: -5px;
+}
+
+/* Premier avatar : pas de marge négative */
+.members .member-avatar:first-child { margin-left: 0; }
+
+.members-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+/* ---- Métadonnées (tâches + date + lien) ---- */
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* Lien "Voir →" */
+.card-link {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--cyan);
+  transition: color 0.2s;
+}
+
+.card-link:hover { color: var(--blue-mid); }
+
+
+/* -----------------------------------------------
+   10. OVERLAY MOBILE (fond sombre derrière sidebar)
+   ----------------------------------------------- */
+.sidebar-overlay {
+  display: none;                   /* Caché par défaut */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 80;
+  backdrop-filter: blur(2px);
+}
+
+/* Activé via JS quand la sidebar est ouverte */
+.sidebar-overlay.is-visible { display: block; }
+
+
+/* ==============================================
+   11. RESPONSIVE – TABLETTE (768px – 1099px)
+   - 2 colonnes pour la grille
+   - Sidebar toujours visible
+   ============================================== */
+@media (max-width: 1099px) {
+
+  /* 2 colonnes au lieu de 3 */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Légère réduction du padding principal */
+  .main-content {
+    padding: 22px 20px 32px;
+  }
+}
+
+
+/* ==============================================
+   12. RESPONSIVE – MOBILE (≤ 767px)
+   - 1 colonne pour la grille
+   - Sidebar masquée (slide depuis la gauche)
+   - Hamburger visible
+   ============================================== */
+@media (max-width: 767px) {
+
+  /* ---- Topbar mobile ---- */
+  .topbar {
+    padding: 0 16px;
+  }
+
+  /* Masquer la navigation et la zone user sur mobile */
+  .topbar__nav  { display: none; }
+  .topbar__user { display: none; }
+
+  /* Afficher le bouton hamburger */
+  .hamburger {
+    display: flex;
+    margin-left: auto;
+  }
+
+  /* ---- Sidebar : hors écran par défaut, slide vers la droite ---- */
+  .sidebar {
+    transform: translateX(-100%);  /* Cachée à gauche */
+    z-index: 95;
+    width: 260px;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.15);
+  }
+
+  /* Sidebar ouverte (classe ajoutée via JS) */
+  .sidebar.is-open {
+    transform: translateX(0);      /* Visible */
+  }
+
+  /* ---- Contenu principal : toute la largeur ---- */
+  .main-content {
+    margin-left: 0;                /* Plus de marge pour la sidebar */
+    padding: 20px 14px 32px;
+  }
+
+  /* ---- Grille : 1 seule colonne ---- */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ---- En-tête : colonne sur mobile ---- */
+  .content-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .content-header__right {
+    flex-wrap: wrap;
+  }
+
+  /* Barre de recherche pleine largeur sur mobile */
+  .search-bar {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  /* Carte large : pas de max-width sur mobile */
+  .project-card--wide {
+    max-width: 100%;
+  }
+
+  /* Nom utilisateur masqué sur mobile (trop long) */
+  .user-name { display: none; }
+}

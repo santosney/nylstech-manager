@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NylsTask – Connexion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+  <!-- ══ LEFT ══ -->
+  <div class="left">
+    <div class="brand">
+      <div class="brand-icon">N</div>
+      <span class="brand-name">NylsTask</span>
+    </div>
+
+    <div class="hero">
+      <h1>Organisez vos projets.<br>Collaborez sans friction.<br>Livrez à temps.</h1>
+      <ul class="features">
+        <li>Gestion de projets collaborative</li>
+        <li>Suivi des tâches en temps réel</li>
+        <li>Interface responsive — mobile &amp; desktop</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT ══ -->
+  <div class="right">
+    <div class="card">
+
+      <div class="c-brand">
+        <div class="c-brand-icon">N</div>
+        <span class="c-brand-name">NylsTask</span>
+      </div>
+
+      <h2>Connexion à votre espace</h2>
+      <p class="c-sub">Pas encore de compte ? <a href="#">Créer un compte</a></p>
+
+      <div class="field">
+        <label for="email">Adresse e-mail <span class="req">*</span></label>
+        <input id="email" type="email" placeholder="demo@nylstech.com" autocomplete="email"/>
+      </div>
+
+      <div class="field">
+        <label for="password">Mot de passe <span class="req">*</span></label>
+        <div class="input-wrap">
+          <input id="password" type="password" value="azertyuiopqs" autocomplete="current-password"/>
+          <button class="eye-btn" type="button" onclick="togglePwd(this)" aria-label="Voir le mot de passe">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="row-opts">
+        <label class="remember">
+          <input type="checkbox"> Se souvenir de moi
+        </label>
+        <a href="#" class="forgot">Mot de passe oublié ?</a>
+      </div>
+
+      <button class="btn-login" type="button">Se connecter</button>
+
+      <p class="terms">
+        En vous connectant, vous acceptez nos
+        <a href="#">Conditions d'utilisation</a> et notre<br>
+        <a href="#">Politique de confidentialité</a>.
+      </p>
+    </div>
+  </div>
+
+  
+</body>
+</html>
